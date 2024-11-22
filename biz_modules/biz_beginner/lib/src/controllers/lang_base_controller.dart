@@ -11,6 +11,10 @@ class LangBaseController extends GetxController {
     '错误处理与调试',
     '泛型、mixins、extension'
   ];
+
+  final String baseDataType = ''' 
+  
+  ''';
   @override
   void onInit() {
     // TODO: implement onInit

@@ -22,8 +22,16 @@ class LangBaseView extends GetView<LangBaseController> {
               controller.items.length,
               (index) => FSListItem(
                     title: controller.items[index],
-                    onTap: (String? title) {},
+                    onTap: (String? title) {
+                      showContentByTitle(title);
+                    },
                   ))),
     );
+  }
+
+  void showContentByTitle(String? title) {
+    if (title == '基本数据类型') {
+      BottomSheetUtil.showContentBottomSheet(title ?? '');
+    }
   }
 }

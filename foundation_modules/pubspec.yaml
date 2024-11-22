@@ -38,6 +38,8 @@ dependencies:
   get: ^4.6.6
   fs_widgets:
     path: fs_widgets
+  fs_utils:
+    path: fs_utils
 dev_dependencies:
   flutter_test:
     sdk: flutter

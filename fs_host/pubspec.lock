@@ -117,6 +117,13 @@ packages:
       relative: true
     source: path
     version: "1.0.0+1"
+  fs_utils:
+    dependency: transitive
+    description:
+      path: "../foundation_modules/fs_utils"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   fs_widgets:
     dependency: transitive
     description:

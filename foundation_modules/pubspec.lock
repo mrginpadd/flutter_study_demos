@@ -75,6 +75,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  fs_utils:
+    dependency: "direct main"
+    description:
+      path: fs_utils
+      relative: true
+    source: path
+    version: "1.0.0+1"
   fs_widgets:
     dependency: "direct main"
     description:
