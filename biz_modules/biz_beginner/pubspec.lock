@@ -9,6 +9,13 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.11.0"
+  biz_common:
+    dependency: "direct main"
+    description:
+      path: "../../biz_common"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   boolean_selector:
     dependency: transitive
     description:
@@ -75,6 +82,28 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  foundation_modules:
+    dependency: transitive
+    description:
+      path: "../../foundation_modules"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  fs_widgets:
+    dependency: transitive
+    description:
+      path: "../../foundation_modules/fs_widgets"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  get:
+    dependency: transitive
+    description:
+      name: get
+      sha256: e4e7335ede17452b391ed3b2ede016545706c01a02292a6c97619705e7d2a85e
+      url: "https://pub.flutter-io.cn"
+    source: hosted
+    version: "4.6.6"
   leak_tracker:
     dependency: transitive
     description:

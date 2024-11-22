@@ -9,10 +9,38 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.11.0"
+  biz_advanced:
+    dependency: transitive
+    description:
+      path: "../biz_modules/biz_advanced"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  biz_beginner:
+    dependency: transitive
+    description:
+      path: "../biz_modules/biz_beginner"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   biz_common:
     dependency: "direct main"
     description:
       path: "../biz_common"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  biz_middle:
+    dependency: transitive
+    description:
+      path: "../biz_modules/biz_middle"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  biz_modules:
+    dependency: "direct main"
+    description:
+      path: "../biz_modules"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -86,6 +114,13 @@ packages:
     dependency: transitive
     description:
       path: "../foundation_modules"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  fs_widgets:
+    dependency: transitive
+    description:
+      path: "../foundation_modules/fs_widgets"
       relative: true
     source: path
     version: "1.0.0+1"

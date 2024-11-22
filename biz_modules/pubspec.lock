@@ -9,10 +9,31 @@ packages:
       url: "https://pub.flutter-io.cn"
     source: hosted
     version: "2.11.0"
+  biz_advanced:
+    dependency: "direct main"
+    description:
+      path: biz_advanced
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  biz_beginner:
+    dependency: "direct main"
+    description:
+      path: biz_beginner
+      relative: true
+    source: path
+    version: "1.0.0+1"
   biz_common:
     dependency: "direct main"
     description:
       path: "../biz_common"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  biz_middle:
+    dependency: "direct main"
+    description:
+      path: biz_middle
       relative: true
     source: path
     version: "1.0.0+1"

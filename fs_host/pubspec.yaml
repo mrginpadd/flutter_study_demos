@@ -37,6 +37,8 @@ dependencies:
   cupertino_icons: ^1.0.8
   biz_common:
     path: ../biz_common
+  biz_modules:
+    path: ../biz_modules
 dev_dependencies:
   flutter_test:
     sdk: flutter
