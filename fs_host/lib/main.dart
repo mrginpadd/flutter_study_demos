@@ -29,17 +29,6 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     '事件交互',
     '路由与导航',
     '动画',
-    '存储',
-    '数据传递',
-    '网络与Json',
-    //使用 http 或 dio 进行网络请求
-    // 数据缓存与持久化
-    // 图片缓存与异步加载
-    '语言基础',
-    'UI组件',
-    '事件交互',
-    '路由与导航',
-    '动画',
     // 高级动画实现：Implicit、Explicit 动画
     // 自定义动画曲线和控制动画
     // Tween 和 AnimationController 的高级用法
@@ -47,6 +36,9 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     '存储',
     '数据传递',
     '网络与Json'
+    //使用 http 或 dio 进行网络请求
+    // 数据缓存与持久化
+    // 图片缓存与异步加载
   ];
   final List<String> level_middle = [
     '渲染原理及引擎架构',

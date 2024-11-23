@@ -1,3 +1,5 @@
+import 'dart:isolate';
+
 import 'package:biz_beginner/src/controllers/lang_base_controller.dart';
 import 'package:biz_common/biz_common.dart';
 import 'package:flutter/material.dart';
@@ -263,6 +265,103 @@ class LangBaseView extends GetView<LangBaseController> {
   }
   ''';
 
+  Stream<int> countNumbers() async* {
+    for(int i=0; i<5; i++) {
+      await Future.delayed(Duration(seconds: 1));
+      yield i; // 将每个值传递到流中
+    }
+  }
+
+  String yb = '''
+  Flutter异步编程包括：
+    Future: 用于单一异步任务，返回一个未来的结果。
+    Stream: 用于处理多个异步事件，如数据流。
+    async/await：使得代码可以在不阻塞主线程的情况下，顺序执行异步操作。
+    Isolates: 用于处理计算密集型任务，通过消息传递进行通信。
+    FutureBuilder和StreamBuilder: 在 Flutter 中处理异步数据并自动更新 UI 的 Widget。
+   
+    Future 
+      Future用来处理延时的任务，最终会返回一个结果。
+      常见的异步操作，如网络请求，都会返回一个Future对象。
+      async将该函数标记为异步函数，该函数会返回一个Future。
+      await 关键字用于等待Future完成，获取其结果。
+      例子：
+      Future<String> fetchData() async {
+        await Future.delayed(Duration(seconds: 2));
+        return 'Data fetched';
+      }
+      
+      void main() async {
+        // await同步方式获取结果
+        String res = await fetchData();
+        // 或者.then回调方式获取结果 
+        // then() Future完成后执行回调，获取返回值
+        // catchError() 捕获错误
+        // whenComplete() 不管Future是否成功，都会执行的回调
+        String res = fetchData().then((data) {
+          print(data);
+        }).catchError((e) => print('Error: \$e')
+        .whenComplete((e) {
+         
+         })
+        )
+        print(res);
+      }
+      
+      Stream
+        Stream是Dart中处理多个异步事件的类型，表示一个数据流。
+        与Future不同，Stream会提供多个事件，而不仅仅是一个值。
+        常见的场景包括监听来自WebSocket、文件系统的事件等。
+      Stream<int> countNumbers() async* {
+        for (int i = 1; i <= 5; i++) {
+          await Future.delayed(Duration(seconds: 1));
+          yield i;  // 将每个值传递到流中
+      }
+      Stream 用于处理多个异步事件，可以使用 await* 或 listen() 来监听流中的数据。
+        yield 关键字用于生成异步数据流中的元素。
+        Stream 还支持暂停、恢复和取消订阅。
+        listen()：开始监听数据流中的事件。
+        await for：用于等待流中的数据（在 async 函数中使用）。
+        map()：将流中的每个数据转换为另一种类型。
+        where()：筛选流中的数据。
+      
+      void main() {
+        Stream<int> numberStream = countNumbers();
+        numberStream.listen((number) {
+          print('Received: \$number');  // 会依次输出 1, 2, 3, 4, 5
+        });
+      }
+      
+      Isolates
+        Isolates 是 Dart 中实现并发计算的方式，类似于多线程，
+      但与传统的线程不同，Isolates 是独立的内存空间，
+      它们之间不会共享数据，而是通过消息传递来进行通信。
+      适合于进行计算密集型任务时使用，以避免阻塞主线程。
+      
+      Isolate 用于处理计算密集型任务，它避免了多个线程共享数据带来的复杂性。
+      SendPort 和 ReceivePort 用于在主线程和 Isolate 之间传递消息。
+      
+      import 'dart:isolate';
+
+      void sayHello(SendPort sendPort) {
+        sendPort.send('Hello from Isolate');
+      }
+
+      void main() async {
+        final receivePort = ReceivePort();  // 接收来自 Isolate 的消息
+        await Isolate.spawn(sayHello, receivePort.sendPort);
+
+        // 监听消息
+        receivePort.listen((message) {
+          print(message);  // 输出: Hello from Isolate
+          receivePort.close();
+        });
+      }
+
+      
+
+  ''';
+
   @override
   Widget build(BuildContext context) {
     controller = Get.isRegistered<LangBaseController>()
@@ -286,21 +385,28 @@ class LangBaseView extends GetView<LangBaseController> {
     );
   }
 
-  void showContentByTitle(String? title) {
+  void showContentByTitle(String? title) async {
     if (title == '基本数据类型') {
       BottomSheetUtil.showContentBottomSheet(dataTypesStr ?? '');
     } else if (title == '函数') {
       BottomSheetUtil.showContentBottomSheet(functionStr);
     } else if (title == '类与对象') {
-      Dog dog = Dog();
-      dog.run();
-      dog.makeSound();
-      dog.eat();
-
-      //抽象类  必须实现抽象方法
-      Shape shape = Circle(10);
-      print('圆的面积 ${shape.area()}');
       BottomSheetUtil.showContentBottomSheet(oopStr);
+    } else if (title == '异步编程') {
+      Stream<int> numberStream = countNumbers();
+      numberStream.listen((number) {
+        print('接收流信号: $number');
+      });
+
+      final receivePort = ReceivePort(); //接收来自Isolate的信息
+      await Isolate.spawn(sendData, receivePort.sendPort);
+
+      //监听消息
+      receivePort.listen((msg) {
+        print('接收到来自Isolate的消息 $msg');
+        receivePort.close();
+      });
+      BottomSheetUtil.showContentBottomSheet(yb);
     }
   }
 }
@@ -382,3 +488,7 @@ class C implements A,B {
 
 }
 
+
+void sendData(SendPort sendPort) {
+  sendPort.send('Data from Isolate');
+}
