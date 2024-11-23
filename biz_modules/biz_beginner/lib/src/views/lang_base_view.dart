@@ -362,6 +362,65 @@ class LangBaseView extends GetView<LangBaseController> {
 
   ''';
 
+  String pubManagement = '''
+  所有的依赖项和包信息都记录在项目的pubspec.yaml文件中,
+  pubspec.yaml文件：
+    name: my_flutter_app （项目名称）
+    description: A new Flutter project （项目描述）
+    publish_to: 'none' # This keeps the package private.
+    (项目版本)
+    version: 1.0.0+1
+    (应用所依赖的第三方包)
+    dependencies:
+      flutter:
+        sdk: flutter
+      cupertino_icons: ^0.1.3
+      provider: ^6.0.1
+    (仅在开发环境所依赖的第三方包)
+    dev_dependencies:
+      flutter_test:
+        sdk: flutter
+    (Flutter SDK相关的配置)
+    flutter:
+       uses-material-design: true
+
+    依赖的添加与更新
+    
+    添加依赖
+    编辑pubsepc.yaml文件手动添加
+    dependencies:
+      http: ^0.13.3
+    命令行添加
+    flutter pub add http
+    这会自动把包添加到 pubspec.yaml 文件中，并且下载该包。
+    
+    获取依赖：
+    每次修改pubspec.yaml文件后，需要运行以下命令来
+    获取安装项目中所需的所有依赖项目
+    flutter pub get
+    
+    更新依赖：
+    更新所有依赖到最新版本
+    flutter pub uppgrade
+    
+    插件与包：
+    Flutter插件： 包含与平台交互的原生代码
+    Dart包：纯Dart编写的包，通常不涉及平台原生功能。
+    
+    版本控制：
+    ^1.2.3: 支持从1.2.3到2.0.0的版本，但不包括2.0.0
+    >=1.0.0 <2.0.0 
+    any: 表示可以使用任何版本
+    
+    发布和使用自定义包：
+    如果开发了一个包并希望与他人共享，可以发布到pub.dev上。
+    发布步骤：
+    创建一个新的Dart包。
+    填写pubspec.yaml文件。
+    通过flutter pub publist发布包。
+    
+  ''';
+
   @override
   Widget build(BuildContext context) {
     controller = Get.isRegistered<LangBaseController>()
@@ -393,20 +452,22 @@ class LangBaseView extends GetView<LangBaseController> {
     } else if (title == '类与对象') {
       BottomSheetUtil.showContentBottomSheet(oopStr);
     } else if (title == '异步编程') {
-      Stream<int> numberStream = countNumbers();
-      numberStream.listen((number) {
-        print('接收流信号: $number');
-      });
-
-      final receivePort = ReceivePort(); //接收来自Isolate的信息
-      await Isolate.spawn(sendData, receivePort.sendPort);
-
-      //监听消息
-      receivePort.listen((msg) {
-        print('接收到来自Isolate的消息 $msg');
-        receivePort.close();
-      });
+      // Stream<int> numberStream = countNumbers();
+      // numberStream.listen((number) {
+      //   print('接收流信号: $number');
+      // });
+      //
+      // final receivePort = ReceivePort(); //接收来自Isolate的信息
+      // await Isolate.spawn(sendData, receivePort.sendPort);
+      //
+      // //监听消息
+      // receivePort.listen((msg) {
+      //   print('接收到来自Isolate的消息 $msg');
+      //   receivePort.close();
+      // });
       BottomSheetUtil.showContentBottomSheet(yb);
+    } else if (title == '库与包管理') {
+      BottomSheetUtil.showContentBottomSheet(pubManagement);
     }
   }
 }
