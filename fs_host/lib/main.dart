@@ -1,11 +1,33 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:biz_common/biz_common.dart';
 import 'package:biz_modules/biz_modules.dart';
 
-void main() => runApp(GetMaterialApp(
+void main() {
+
+  // 配置 Flutter 的全局错误处理机制
+  FlutterError.onError = (FlutterErrorDetails details) {
+    // 这里可以自定义错误信息的处理方式
+    // 你可以选择记录错误信息，或者上传给服务器
+    print('捕获到全局错误: ${details.exception}');
+
+    // 显示自定义错误页面
+    runApp(ErrorPageApp());
+  };
+
+  // 捕捉异步错误
+  runZonedGuarded(() {
+    runApp(GetMaterialApp(
       home: Home(),
       getPages: [...BizBeginnerRouter.routes],
     ));
+  }, (error, stackTrace) {
+    print('捕获到未处理的错误: $error');
+    // 显示自定义错误页面
+    runApp(ErrorPageApp());
+  });
+}
 
 class Controller extends GetxController {
   var count = 0.obs;
@@ -154,5 +176,42 @@ class TabPage extends StatelessWidget {
                 Get.toNamed(BizBeginnerRouter.langBase);
               }
         },),));
+  }
+}
+// 自定义错误页面
+class ErrorPageApp extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: '错误页面',
+      home: Scaffold(
+        appBar: AppBar(
+          title: Text('发生错误'),
+        ),
+        body: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.error, color: Colors.red, size: 100),
+              SizedBox(height: 20),
+              Text(
+                '抱歉，发生了一些问题！\n请稍后再试。',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 18),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  // 可以在此添加重新加载应用的逻辑
+                  // runApp(MyApp());  // 重新启动应用
+                  // 捕捉异步错误
+                },
+                child: Text('重新加载'),
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

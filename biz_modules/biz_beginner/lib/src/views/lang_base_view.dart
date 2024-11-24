@@ -421,6 +421,80 @@ class LangBaseView extends GetView<LangBaseController> {
     
   ''';
 
+  String errors = '''
+  Flutter处理错误的方式：异常处理、错误边界、日志记录等。
+  异常处理(Exception Handling)
+  异常分为2类：
+  Exception: 通常是可恢复的错误，开发者可以处理。
+  Error: 通常是不可恢复的错误，如访问空指针。
+  try-catch块捕捉并处理异常
+  注意try catch只能捕获同步的异常。
+  如果是异步的异常需要用Future.catchError方法捕获。
+  try {
+    //可能会抛出异常的代码
+    var result = 10/0;
+  } catch(e) {
+    print('捕获到异常: \$e');
+  } finally {
+    print('此块代码无论如何都会执行');
+  }
+  
+  Flutter特有的错误边界处理
+  FlutterError.onError 和 Zone 等机制捕捉应用中的未捕获错误
+  FlutterError.onError: 
+  是一个全局错误处理器，用于捕捉Flutter框架级的错误。
+  FlutterError.onError = (FlutterErrorDetails details) {
+    FlutterError.dumpErrorToConsole(details);
+  }
+  
+  自定义错误页面
+  当出现未捕获的错误时，Flutter允许你为用户显示一个自定义的错误页面。
+  你可以使用ErrorWidget.builder定制错误页面
+  ErrorWidget.builder = (FlutterErrorDetails details) {
+    return Scaffold(
+      appBar: AppBar(title: Text('出错了')),
+      body: Center(
+        child: Text('发生了未捕获的错误： \${details.exception}')
+      )
+    );
+  }
+  
+  Zone:通过Dart的Zone API，可以捕捉和处理所有的异步错误。
+  void main() {
+    runZonedGuarded(() {
+      runApp(MyApp());
+    }, (error, stackTrace) {
+      print('捕获到未处理的错误: \$error');
+    })
+  }
+  
+  Flutter调试工具
+  Flutter提供了多种调试工具，帮助开发者在开发过程中快速定位问题。
+  
+  Flutter DevTools
+  Flutter DevTools是Flutter官方提供的一套强大的调试工具集，帮助开发者分析应用的
+  性能、内存使用情况、UI视图树等。
+  它包含多个调试工具：
+  Inspector: 查看应用的Widget树，帮助定位UI问题。
+  Widget Inspector: 检查UI布局和渲染。
+  Performance: 显示应用的帧率、CPU占用等性能信息。
+  Memory: 显示内存使用情况，帮助分析内存泄漏等问题。
+  Network: 查看HTTP请求和响应，适合调试网络请求。
+  Logs: 查看调试日志和错误信息。
+  
+  DevTools可以通过以下命令启动
+  flutter pub global activate devtools
+  flutter run --profile
+  
+  flutter热重载和热重启
+  热重载：修改代码后可以快速看到UI的变化
+  热重启：重新初始化应用，但保持已加载的资源。
+  
+  日志记录与调试输出
+  print() 输出调试信息到控制台
+  debugPrint() 输出长日志信息到控制台
+  ''';
+
   @override
   Widget build(BuildContext context) {
     controller = Get.isRegistered<LangBaseController>()
@@ -468,6 +542,9 @@ class LangBaseView extends GetView<LangBaseController> {
       BottomSheetUtil.showContentBottomSheet(yb);
     } else if (title == '库与包管理') {
       BottomSheetUtil.showContentBottomSheet(pubManagement);
+    } else if (title == '错误处理与调试') {
+      // throw '手动抛出一个错误';
+      BottomSheetUtil.showContentBottomSheet(errors);
     }
   }
 }
