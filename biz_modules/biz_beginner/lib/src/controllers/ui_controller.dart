@@ -32,6 +32,7 @@ class UIController extends GetxController {
     'TextButton',
     'OutlinedButton',
     'IconButton',
+    'GestureDetector',
     'Switch',
     'Checkbox',
   ];
