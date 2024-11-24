@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
 class LangBaseView extends GetView<LangBaseController> {
-  late final LangBaseController controller;
+  late LangBaseController controller;
 
   String dataTypesStr = '''
       int myInt = 2;  //整型
@@ -495,6 +495,117 @@ class LangBaseView extends GetView<LangBaseController> {
   debugPrint() 输出长日志信息到控制台
   ''';
 
+  String others = '''
+  泛型、Mixin和Extension能大大提高代码的灵活性和可维护性。
+  
+  泛型
+  泛型是Dart提供的一种类型系统特性，允许我们在定义类、方法、接口时，使用
+  类型参数使得代码更加灵活、可复用，并且保持类型安全。
+  定义泛型类
+  class Box<T> {
+    T value;
+    Box(this.value);
+    void printValue() {
+      print(value);
+    }
+  }
+  void main() {
+    var intBox = Box<int>(5); //泛型类型为int
+    intBox.printValue(); //输出：5
+    
+    var stringBox = Box<String>('hello'); //泛型类型为String
+    stringBox.printValue(); //输出：Hello
+  }
+  
+  泛型函数
+  T identity<T>(T value) {
+    return value;
+  }
+  void main() {
+    print(identity<int>(5)); //输出：5
+    print(identity<String>('hello')); //输出：hello
+  }
+  
+  
+  约束泛型
+  通过extends关键字，可以约束泛型类型必须满足某些条件。
+  例如，只允许传入实现了某个接口的类型。
+  class Box<T extends Number> {
+    T value;
+    Box(this.value);
+    
+    void printValue() {
+      print(value);
+    }
+  }
+  void main() {
+    var intBox = Box<int>(5); //int 是Number的子类
+    intBox.printValue(); //输出：5
+    
+    //会报错，因为String不是Number的子类
+    var stringBox = Box<String>('hello');
+  }
+  
+  Mixin
+  Mixin是Dart中一种实现代码复用的方式，它允许一个类在多个类之间
+  共享功能，而不需要继承。
+  Mixin的特点是可以混入多个类的行为，而不改变类的层次结构。
+  
+  定义Mixin
+  mixin Swimmer {
+    void swim() {
+      print('Swimming');
+    }
+  }
+  mixin Flyer {
+    void fly() {
+      print('Flying');
+    }
+  }
+  class Animal {}
+  class Duck extends Animal with Simmer, Flyer {}
+  
+  void main() {
+    var duck = Duck();
+    duck.swim();
+    duck.fly();
+  }
+  
+  Mixin的限制
+  Mixin不能包含构造函数，且不能作为普通类那样被实例化。
+  
+  Mixin和继承的对比
+  Mixin是对类的一种功能扩展，而不是层次扩展。如果你只是希望
+  增加类的功能而不想改变其层次结构，可以使用Mixin。
+  
+  Extension的使用
+  
+  定义Extension
+  class EnvStr {
+    static const String test = 'www.baidu-test.com';
+    static const String prd = 'www.baidu.com';
+  }
+  extension Evn on EnvStr {
+    static String get test => EnvStr.test;
+    static String get prd => EnvStr.prd;
+  }
+  使用
+  Env.test
+  Env.prd
+  
+  
+  扩展现有类
+  你也可以为现有类添加方法或getter/setter，而无需修改类本身。
+  extension on List<int> {
+    int get sum {
+      return this.fold(0, (prev, element) => prev + element);
+    }
+  }
+  void main() {
+    var numbers = [1,2,3,4,5];
+    print(numbers.sum); //输出： 15
+  }
+  ''';
   @override
   Widget build(BuildContext context) {
     controller = Get.isRegistered<LangBaseController>()
@@ -545,6 +656,8 @@ class LangBaseView extends GetView<LangBaseController> {
     } else if (title == '错误处理与调试') {
       // throw '手动抛出一个错误';
       BottomSheetUtil.showContentBottomSheet(errors);
+    } else if(title == '泛型、mixins、extension') {
+      BottomSheetUtil.showContentBottomSheet(others);
     }
   }
 }
