@@ -171,9 +171,11 @@ class TabPage extends StatelessWidget {
     return ListView(
         children: List.generate(
             items.length, (index) => FSListItem(title: items[index], onTap: (String? title) {
-              Get.snackbar(title ?? '', '点击了 $title');
+              // Get.snackbar(title ?? '', '点击了 $title');
               if (title == '语言基础') {
                 Get.toNamed(BizBeginnerRouter.langBase);
+              } else if(title == 'UI组件') {
+                Get.toNamed(BizBeginnerRouter.uiView);
               }
         },),));
   }
