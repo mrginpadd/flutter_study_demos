@@ -110,7 +110,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'Container') {
       BottomSheetUtil.showBottomSheet(containerExample());
     } else if (title == 'Column') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(columnExample());
     } else if (title == 'Row') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Stack') {
@@ -324,6 +324,79 @@ class UIView extends GetView<UIController> {
       child: Container(color: Colors.grey)
     );
     return [container1, container2, container3, container4];
+  }
+
+  ///Column组件
+  List<Widget> columnExample() {
+    Widget column1 = Container(
+      height: 200,
+      color: Colors.red,
+      child: Column(
+        children: [
+          Text('Item1'),
+          Text('Item2'),
+          Text('Item3'),
+          Text('Item4')
+        ],
+      ),
+    );
+
+    Widget column2 = Container(
+      height: 200,
+      color: Colors.grey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [
+          Text('Item1'),
+          Text('Item2'),
+          Text('Item3'),
+          Text('Item4')
+        ],
+      ),
+    );
+
+    Widget column3 = Container(
+      height: 200,
+      color: Colors.grey,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text('Item1'),
+          Text('Item2'),
+          Text('Item3'),
+          Text('Item4')
+        ],
+      ),
+    );
+
+    Widget column4 = Container(
+      height: 200,
+      color: Colors.red,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [
+          Text('Item1'),
+          Text('Item2'),
+          Text('Item3'),
+          Text('Item4')
+        ],
+      ),
+    );
+
+    return [
+      Text('MainAxisAlignment.start 和 MainAxisAlignment.end', style: TextStyle(
+        color: Colors.blue,
+        fontSize: 20,
+      )),
+      column1,
+      column2,
+      Text('CrossAxisAlignment.start 和 CrossAxisAlignment.end', style: TextStyle(
+        color: Colors.blue,
+        fontSize: 20,
+      ),),
+      column3,
+      column4
+    ];
   }
 }
 
