@@ -112,7 +112,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'Column') {
       BottomSheetUtil.showBottomSheet(columnExample());
     } else if (title == 'Row') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(rowExample());
     } else if (title == 'Stack') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Expanded') {
@@ -291,15 +291,15 @@ class UIView extends GetView<UIController> {
         color: Colors.blue,
         width: 100,
         height: 100,
-        child: UnconstrainedBox(child: Container(width: 50, height: 50, color: Colors.red),)
-    );
+        child: UnconstrainedBox(
+          child: Container(width: 50, height: 50, color: Colors.red),
+        ));
     Widget container2 = Container(
-        width: 100,
-        height: 100,
+      width: 100,
+      height: 100,
       decoration: BoxDecoration(
-        color: Colors.yellow,
-        border: Border.all(color: Colors.black, width: 8.0)
-      ),
+          color: Colors.yellow,
+          border: Border.all(color: Colors.black, width: 8.0)),
     );
     Widget container3 = Container(
       width: 100,
@@ -307,22 +307,20 @@ class UIView extends GetView<UIController> {
       decoration: const BoxDecoration(
           color: Colors.green,
           borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(30),  // 左上角圆角
+            topLeft: Radius.circular(30), // 左上角圆角
             topRight: Radius.circular(20), // 右上角圆角
             bottomLeft: Radius.circular(15), // 左下角圆角
             bottomRight: Radius.circular(0), // 右下角无圆角
-          )
-      ),
+          )),
     );
 
     Widget container4 = Container(
-      width: 100,
-      height: 100,
-      color: Colors.red,
-      margin: EdgeInsets.only(left: 30),
-      padding: EdgeInsets.all(10),
-      child: Container(color: Colors.grey)
-    );
+        width: 100,
+        height: 100,
+        color: Colors.red,
+        margin: EdgeInsets.only(left: 30),
+        padding: EdgeInsets.all(10),
+        child: Container(color: Colors.grey));
     return [container1, container2, container3, container4];
   }
 
@@ -331,13 +329,8 @@ class UIView extends GetView<UIController> {
     Widget column1 = Container(
       height: 200,
       color: Colors.red,
-      child: Column(
-        children: [
-          Text('Item1'),
-          Text('Item2'),
-          Text('Item3'),
-          Text('Item4')
-        ],
+      child: Row(
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
       ),
     );
 
@@ -346,12 +339,7 @@ class UIView extends GetView<UIController> {
       color: Colors.grey,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.start,
-        children: [
-          Text('Item1'),
-          Text('Item2'),
-          Text('Item3'),
-          Text('Item4')
-        ],
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
       ),
     );
 
@@ -360,12 +348,7 @@ class UIView extends GetView<UIController> {
       color: Colors.grey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text('Item1'),
-          Text('Item2'),
-          Text('Item3'),
-          Text('Item4')
-        ],
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
       ),
     );
 
@@ -374,28 +357,86 @@ class UIView extends GetView<UIController> {
       color: Colors.red,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
-        children: [
-          Text('Item1'),
-          Text('Item2'),
-          Text('Item3'),
-          Text('Item4')
-        ],
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
       ),
     );
 
     return [
-      Text('MainAxisAlignment.start 和 MainAxisAlignment.end', style: TextStyle(
-        color: Colors.blue,
-        fontSize: 20,
-      )),
+      Text('MainAxisAlignment.start 和 MainAxisAlignment.end',
+          style: TextStyle(
+            color: Colors.blue,
+            fontSize: 20,
+          )),
       column1,
       column2,
-      Text('CrossAxisAlignment.start 和 CrossAxisAlignment.end', style: TextStyle(
-        color: Colors.blue,
-        fontSize: 20,
-      ),),
+      Text(
+        'CrossAxisAlignment.start 和 CrossAxisAlignment.end',
+        style: TextStyle(
+          color: Colors.blue,
+          fontSize: 20,
+        ),
+      ),
       column3,
       column4
+    ];
+  }
+
+  ///Row组件
+  List<Widget> rowExample() {
+    Widget row1 = Container(
+      height: 50,
+      color: Colors.red,
+      child: Row(
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
+      ),
+    );
+
+    Widget row2 = Container(
+      height: 50,
+      color: Colors.blue,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
+      ),
+    );
+
+    Widget row3 = Container(
+      height: 50,
+      color: Colors.green,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
+      ),
+    );
+
+    Widget row4 = Container(
+      height: 100,
+      color: Colors.deepOrange,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.end,
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
+      ),
+    );
+    Widget row5 = Container(
+      height: 100,
+      color: Colors.grey,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [Text('Item1'), Text('Item2'), Text('Item3'), Text('Item4')],
+      ),
+    );
+    return [
+      row1,
+      Text('MainAxisAlignment.start 和 MainAxisAlignment.end',
+          style: TextStyle(
+              color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 20)),
+      row2,
+      row3,
+      Text('CrossAxisAlignment.start 和 CrossAxisAlignment.end',
+          style: TextStyle(
+              color: Colors.blue, fontWeight: FontWeight.bold, fontSize: 20)),
+      row4,
+      row5
     ];
   }
 }
