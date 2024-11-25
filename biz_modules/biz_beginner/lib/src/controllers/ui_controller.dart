@@ -4,7 +4,6 @@ class UIController extends GetxController {
   ///常用组件 文本和图片
   final List<String> commonWidgets = [
     'Text',
-    'RichText',
     'Image'
   ];
   ///布局组件

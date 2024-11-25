@@ -88,10 +88,8 @@ class UIView extends GetView<UIController> {
     // Get.snackbar(title, title);
     if (title == 'Text') {
       BottomSheetUtil.showBottomSheet(textExample());
-    } else if (title == 'RichText') {
-      BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Image') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(imageExample());
     } else if (title == 'Container') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Column') {
@@ -145,6 +143,7 @@ class UIView extends GetView<UIController> {
     }
   }
 
+  ///Text组件
   List<Widget> textExample() {
     //文本自动换行
     Widget text1 = Container(
@@ -239,6 +238,33 @@ class UIView extends GetView<UIController> {
       text7,
       Text('文本行数限制'),
       text8
+    ];
+  }
+
+  ///Image组件
+  List<Widget> imageExample() {
+    return [
+      Text('''
+        //1.加载本地资源图片
+    //通常是将图片文件放置在项目的assets文件夹下，并在pubspec.yaml文件中声明这些资源
+    //a.将图片文件放入 assets/images文件夹中
+    //b.在pubspec.yaml文件中注册资源路径
+    //flutter:
+    //   assets:
+    //     - assets/images/
+    //c.使用Image.asset来加载图片
+    //Image.asset('assets/images/example.png')
+    //2.加载网络图片
+    //Image.network 用于从网络加载图像，会根据给定的URL加载并显示图像
+    //3.加载内存中的图片
+    //Uint8List imageData = ... //图片的二进制数据
+    //Image.memory(imageData);
+    //4.从文件加载图片
+    //File imageFile = File('/path/to/image.jpg');
+    //Image.file(imageFile);
+    //5.CachedNetworkImage缓存网络图片，避免每次都重新加载。
+    // Widget img1 = Image.asset('images/cr.png');
+    ''')
     ];
   }
 }
