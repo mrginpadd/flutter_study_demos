@@ -115,10 +115,8 @@ class UIView extends GetView<UIController> {
       BottomSheetUtil.showBottomSheet(rowExample());
     } else if (title == 'Stack') {
       BottomSheetUtil.showBottomSheet(stackExample());
-    } else if (title == 'Expanded') {
-      BottomSheetUtil.showBottomSheet([]);
-    } else if (title == 'Flexible') {
-      BottomSheetUtil.showBottomSheet([]);
+    } else if (title == 'Expanded和Flexible') {
+      BottomSheetUtil.showBottomSheet(expandedExample());
     } else if (title == 'ListView') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'GridView') {
@@ -472,6 +470,110 @@ class UIView extends GetView<UIController> {
       ],
     );
     return [text1, stack1];
+  }
+
+  List<Widget> expandedExample() {
+    Widget text1 = Text('''
+    Expanded通常与Row\Column\Flex一起使用，用于在主轴上扩展并填充剩余空间。
+    ''');
+
+    Widget exp1 = Row(children: [
+      Container(color: Colors.red, width: 50, height: 50),
+      Expanded(child: Container(color: Colors.blue, height: 50, child: Text(
+      'Expanded填充剩余空间'))),
+      Container(color: Colors.green,width: 50,height: 50)
+    ]);
+
+    Widget text2 = Text('''
+    Expanded的flex属性，控制多个Expanded子组件之间的空间分配
+    ''');
+
+    Widget exp2 = Row(
+      children: <Widget>[
+        Expanded(
+          flex: 2,  // 占总空间的 2/3
+          child: Container(
+            color: Colors.red,
+            height: 50,
+            child: Text('flex:2'),
+          ),
+        ),
+        Expanded(
+          flex: 1,  // 占总空间的 1/3
+          child: Container(
+            color: Colors.blue,
+            height: 50,
+            child: Text('flex: 1'),
+          ),
+        ),
+        Expanded(
+          flex: 3,  // 占总空间的 1/3
+          child: Container(
+            color: Colors.green,
+            height: 50,
+            child: Text('flex: 3'),
+          ),
+        ),
+      ],
+    );
+
+    Widget text3 = Text('''
+    Expanded其实就是flex:1的 Flexible
+    使用 Expanded 时，子组件会填满父容器的所有剩余空间，而不管它是否需要。
+使用 Flexible 时，子组件将灵活地占据可用空间，如果空间不足，子组件会缩小，保持比例而不会强制扩展。
+    ''');
+    Widget exp3 = Row(
+      children: <Widget>[
+        Container(
+          color: Colors.red,
+          width: 50,
+          height: 50,
+        ),
+        Flexible(
+          flex: 1,
+          child: Container(
+            color: Colors.blue,
+            height: 50,
+            child: Text('Flexible flex:2'),
+          ),
+        ),
+        Flexible(
+          flex: 3,
+          child: Container(
+            color: Colors.green,
+            height: 50,
+            child: Text('Flexible flex:1 可以看到这里并没有强制填充剩余空间'),
+          ),
+        ),
+      ],
+    );
+
+    Widget exp4 = Row(
+      children: <Widget>[
+        Container(
+          color: Colors.red,
+          width: 50,
+          height: 50,
+        ),
+        Flexible(
+          flex: 1,
+          child: Container(
+            color: Colors.blue,
+            height: 50,
+            child: Text('Flexible flex:2'),
+          ),
+        ),
+        Flexible(
+          flex: 3,
+          child: Container(
+            color: Colors.green,
+            height: 50,
+            child: Text('Flexible flex:1')
+          )
+        )
+      ]
+    );
+    return [text1, exp1, text2, exp2, text3, exp3, SizedBox(height: 30),exp4];
   }
 }
 

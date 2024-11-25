@@ -13,8 +13,7 @@ class UIController extends GetxController {
     'Column',
     'Row',
     'Stack',
-    'Expanded',
-    'Flexible',
+    'Expanded和Flexible',
     'ListView',
     'GridView'
   ];
