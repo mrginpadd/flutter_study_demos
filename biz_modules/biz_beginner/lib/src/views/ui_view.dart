@@ -114,7 +114,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'Row') {
       BottomSheetUtil.showBottomSheet(rowExample());
     } else if (title == 'Stack') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(stackExample());
     } else if (title == 'Expanded') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Flexible') {
@@ -438,6 +438,40 @@ class UIView extends GetView<UIController> {
       row4,
       row5
     ];
+  }
+
+  ///Stack组件
+  List<Widget> stackExample() {
+    Widget text1 = Text('''
+    Stack允许子组件按层次堆叠起来
+    ''');
+    Widget stack1 = Stack(
+      children: [
+        Container(
+          width: 100,
+          height: 300,
+          color: Colors.red,
+          child: Text('盒子1'),
+        ),
+        Positioned(
+            left: 50,
+            top: 50,
+            child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.blue,
+                child: Text('盒子2'))),
+        Positioned(
+            left: 100,
+            top: 80,
+            child: Container(
+                width: 100,
+                height: 100,
+                color: Colors.green,
+                child: Text('盒子3'))),
+      ],
+    );
+    return [text1, stack1];
   }
 }
 
