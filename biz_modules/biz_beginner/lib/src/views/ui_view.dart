@@ -90,8 +90,25 @@ class UIView extends GetView<UIController> {
       BottomSheetUtil.showBottomSheet(textExample());
     } else if (title == 'Image') {
       BottomSheetUtil.showBottomSheet(imageExample());
+    } else if (title == '布局约束') {
+      BottomSheetUtil.showBottomSheet([
+        Text('''
+        Flutter布局方式：
+          上层widget向下层widget传递约束条件
+          然后，下层widget向上层widget传递大小信息
+          最后，上层widget决定下层widget的位置
+          约束实际上就是 4 个浮点类型的集合：最大/最小宽度，以及最大/最小高度。
+
+          尽可能地撑满。例如 Center 和 ListView 使用的 box。
+          尽可能地保持与子节点一致。例如 Transform 和 Opacity 使用的 box。
+          尽可能地布局为指定大小。例如 Image 和 Text 使用的 box。
+
+           Container 的默认构造会让其尽可能地撑满大小限制，
+           但如果你设置了 width，它就会尽可能地遵照你设置的大小。
+      ''')
+      ]);
     } else if (title == 'Container') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(containerExample());
     } else if (title == 'Column') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Row') {
@@ -266,6 +283,47 @@ class UIView extends GetView<UIController> {
     // Widget img1 = Image.asset('images/cr.png');
     ''')
     ];
+  }
+
+  ///Container组件
+  List<Widget> containerExample() {
+    Widget container1 = Container(
+        color: Colors.blue,
+        width: 100,
+        height: 100,
+        child: UnconstrainedBox(child: Container(width: 50, height: 50, color: Colors.red),)
+    );
+    Widget container2 = Container(
+        width: 100,
+        height: 100,
+      decoration: BoxDecoration(
+        color: Colors.yellow,
+        border: Border.all(color: Colors.black, width: 8.0)
+      ),
+    );
+    Widget container3 = Container(
+      width: 100,
+      height: 100,
+      decoration: const BoxDecoration(
+          color: Colors.green,
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(30),  // 左上角圆角
+            topRight: Radius.circular(20), // 右上角圆角
+            bottomLeft: Radius.circular(15), // 左下角圆角
+            bottomRight: Radius.circular(0), // 右下角无圆角
+          )
+      ),
+    );
+
+    Widget container4 = Container(
+      width: 100,
+      height: 100,
+      color: Colors.red,
+      margin: EdgeInsets.only(left: 30),
+      padding: EdgeInsets.all(10),
+      child: Container(color: Colors.grey)
+    );
+    return [container1, container2, container3, container4];
   }
 }
 

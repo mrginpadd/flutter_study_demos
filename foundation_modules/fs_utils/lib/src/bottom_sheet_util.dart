@@ -33,7 +33,10 @@ class BottomSheetUtil {
               borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15), topRight: Radius.circular(15))),
           child: ListView(
-            children: widgets,
+            children: widgets.map((widget) {
+              // 给每个widget包裹一个Center
+              return Row(children: [widget],);
+            }).toList()
           )),
     );
   }
