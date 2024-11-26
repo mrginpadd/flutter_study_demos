@@ -6,6 +6,7 @@ import 'package:flutter/src/widgets/framework.dart';
 class UIView extends GetView<UIController> {
   late UIController controller;
 
+  TextEditingController _textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     controller = Get.isRegistered<UIController>()
@@ -122,7 +123,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'GridView') {
       BottomSheetUtil.showBottomSheet(GridViewExample());
     } else if (title == 'TextField') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(TextFieldExample());
     } else if (title == 'Form') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'FormField') {
@@ -753,6 +754,45 @@ class UIView extends GetView<UIController> {
     );
 
     return [text1, text2, exp1, text3, exp2, text4, exp3];
+  }
+
+  ///TextField
+  List<Widget> TextFieldExample() {
+    Widget text1 = Text('TextField是文本输入框');
+    Widget text2 = Text('''
+      最基本的 TextField 用法是让用户在屏幕上输入文本。可以直接将它放入布局中，并通过 controller 来获取输入的内容。
+    ''');
+    Widget exp1 = TextField(
+      controller: _textController,
+      style: TextStyle(fontSize: 18, color: Colors.blue),
+      keyboardType: TextInputType.phone,
+      decoration: InputDecoration(
+        labelText: '姓名',
+        hintText: '请输入姓名',
+        border: OutlineInputBorder(),
+      ),
+      onChanged: (text) {
+
+      },
+      onSubmitted: (text) {
+
+      },
+    );
+
+    Widget exp2 = TextField(
+      obscureText: true,  // 隐藏输入的文本
+      decoration: InputDecoration(
+        hintText: '请输入密码',
+      ),
+    );
+
+    Widget exp3 = TextField(
+      keyboardType: TextInputType.emailAddress,
+      decoration: InputDecoration(
+        hintText: '请输入日期',
+      ),
+    );
+    return [text1, text2, exp1, exp2, exp3];
   }
 }
 
