@@ -124,8 +124,8 @@ class UIView extends GetView<UIController> {
       BottomSheetUtil.showBottomSheet(GridViewExample());
     } else if (title == 'TextField') {
       BottomSheetUtil.showBottomSheet(TextFieldExample());
-    } else if (title == 'Form') {
-      BottomSheetUtil.showBottomSheet([]);
+    } else if (title == 'Form和TextFormField') {
+      BottomSheetUtil.showBottomSheet(FormExample());
     } else if (title == 'FormField') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'ElevatedButton') {
@@ -794,6 +794,39 @@ class UIView extends GetView<UIController> {
     );
     return [text1, text2, exp1, exp2, exp3];
   }
+
+  ///FormExample
+  List<Widget> FormExample() {
+    Widget text1 = Text('''
+    Form 是一个用于处理多个表单字段的组件，
+    通常与 TextFormField 配合使用来实现表单的验证、状态管理和提交。
+    
+    Form 组件可以让你集中管理一组表单字段，并且通过一个全局 FormState 来控制表单的验证和操作。
+    Form 是一个用来包裹多个 TextFormField 等表单字段的容器，它的主要作用是集中管理表单状态、校验表单输入、处理提交等。
+    Form 本身并不会处理任何输入或展示表单控件，它只是为 TextFormField 提供一个验证、保存、重置等功能的上下文。
+
+    使用 Form 时，通常会涉及以下几个概念：
+      GlobalKey<FormState>：用于唯一标识一个 Form，并通过该键访问和操作表单的状态。
+      FormState：Form 的状态对象，用于管理表单的验证、保存和重置等操作。
+      validator：表单字段的验证器，用来校验输入值是否符合预期的规则。
+      
+    Form 组件的主要功能：
+      验证：检查表单中的每个字段是否符合预定义的规则（例如：是否为空、是否为有效的邮箱、是否为合法的数字等）。
+      保存：将表单数据保存到对应的字段模型中。
+      重置：清空表单字段的内容。
+      
+    TextFormField 是 Form 中的一个子组件，用于接收用户输入。TextFormField 可以有一个 validator 函数，结合 Form 一起使用时，表单的验证会通过 validator 进行。
+    ''');
+
+    Widget exp1 = Container(
+      decoration: BoxDecoration(
+        color: Colors.white,
+        border: Border.all(color: Colors.black, width: 2)
+      ),
+      child: MyForm(),
+    );
+    return [text1, exp1];
+  }
 }
 
 class TitleWidget extends StatelessWidget {
@@ -807,5 +840,88 @@ class TitleWidget extends StatelessWidget {
         textAlign: TextAlign.center,
         style: const TextStyle(
             fontWeight: FontWeight.bold, fontSize: 20, color: Colors.grey));
+  }
+}
+
+class MyForm extends StatefulWidget {
+  const MyForm({super.key});
+
+  @override
+  State<MyForm> createState() => _MyFormState();
+}
+
+class _MyFormState extends State<MyForm> {
+
+  //创建一个GlobalKey，用来访问FormState
+  final _formKey = GlobalKey<FormState>();
+  //控制器 用来获取TextFormField的输入值
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _pwdController = TextEditingController();
+
+  //表单验证函数
+  String? _validateEmail(String? val) {
+    if (val == null || val.isEmpty) {
+      return '请输入邮箱地址';
+    }
+    //简单的邮箱正则表达式验证
+    String emailPattern = r"^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    RegExp regex = RegExp(emailPattern);
+
+    if(!regex.hasMatch(val)) {
+      return '请输入有效的邮箱地址';
+    }
+    return null;
+  }
+
+  String? _validatePwd(String? pwd) {
+    if (pwd == null || pwd.isEmpty) {
+      return '请输入密码';
+    }
+    if (pwd.length < 6) {
+      return '密码必须至少包含6个字符';
+    }
+    return null;
+  }
+
+  void _submitForm() {
+    if (_formKey.currentState?.validate() ?? false) {
+      //如果验证通过，提交表单数据
+      Get.snackbar('提交的表单数据', '''
+          邮箱： ${_emailController.text}
+          密码： ${_pwdController.text}
+          ''');
+    }
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey, //绑定FormState
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          TextFormField(
+            controller: _emailController,
+            decoration: InputDecoration(
+              labelText: '邮箱',
+              hintText: '请输入邮箱地址'
+            ),
+            keyboardType: TextInputType.emailAddress,
+            validator: _validateEmail,
+          ),
+          SizedBox(height: 17),
+          TextFormField(
+            controller: _pwdController,
+            decoration: InputDecoration(
+              labelText: '密码',
+              hintText: '请输入密码'
+            ),
+            obscureText: true,
+            validator: _validatePwd,
+          ),
+          SizedBox(height: 20),
+          ElevatedButton(onPressed: _submitForm, child: Text('提交'))
+        ],
+      ),
+    );
   }
 }

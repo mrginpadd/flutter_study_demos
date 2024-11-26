@@ -21,7 +21,7 @@ class UIController extends GetxController {
   ///输入组件
   final List<String> inputWidgets = [
     'TextField',
-    'Form',
+    'Form和TextFormField',
     'FormField',
   ];
 
