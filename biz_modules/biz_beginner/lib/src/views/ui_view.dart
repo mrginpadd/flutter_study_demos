@@ -118,7 +118,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'Expanded和Flexible') {
       BottomSheetUtil.showBottomSheet(expandedExample());
     } else if (title == 'ListView') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(listViewExample());
     } else if (title == 'GridView') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'TextField') {
@@ -574,6 +574,82 @@ class UIView extends GetView<UIController> {
       ]
     );
     return [text1, exp1, text2, exp2, text3, exp3, SizedBox(height: 30),exp4];
+  }
+
+  List<Widget> listViewExample() {
+    Widget text1 = Text('''
+    ListView是可滚动的列表，允许在垂直或水平方向上滚动。
+    自动处理列表项的重用和渲染。
+    节省内存，因为只渲染课件可见区域的元素，
+    其他不在可视范围内的元素会被销毁并且不再占用内存。
+    
+    ListView提供了几种常见的创建方式，每一种都有不同的使用场景。
+    ''');
+
+    Widget text2 = Text(
+      '''
+      基本的ListView
+      直接将列表数据放在children属性，适合数据量较小的情况。
+      因为数据量大，直接创建了很多子元素出来。
+      '''
+    );
+    Widget exp1 = Container(
+      height: 100,
+      decoration: BoxDecoration(
+        color: Colors.grey ,
+        border: Border.all(color: Colors.black, width: 2.0)
+      ),
+      child: ListView(
+        children: [
+          ListTile(title: Text('Item 1')),
+          ListTile(title: Text('Item 2')),
+          ListTile(title: Text('Item 3')),
+        ],
+      ),
+    );
+    Widget text3 = Text(
+        '''
+       ListView.builder(适合长列表)
+       当你需要展示动态生成的内容，比如从网络请求获得数据，或者列表
+       内容非常多时，使用ListView.builder会更加高效。
+       ListView.builder只会构建当前屏幕内的子项，并且随着用户
+       滚动，新的列表项目会被构建出来。
+      '''
+    );
+
+    Widget exp2 = Container(
+      height: 200,
+      decoration: BoxDecoration(
+        color: Colors.grey,
+        border: Border.all(color: Colors.black, width: 2)
+      ),
+      child: ListView.builder(
+          itemCount: 100,
+          itemBuilder: (BuildContext context, int index) {
+            return ListTile(title: Text('Item $index'));
+          }),
+    );
+
+    Widget text4 = Text(
+        '''
+       ListView.separated 带分隔符的列表
+      '''
+    );
+    Widget exp3 = Container(
+        height: 100,
+        decoration: BoxDecoration(
+            color: Colors.grey,
+            border: Border.all(color: Colors.black, width: 2)),
+        child: ListView.separated(
+          itemBuilder: (context, index) {
+            return ListTile(title: Text('Item: $index'));
+          },
+          separatorBuilder: (context, index) {
+            return Divider();
+          },
+          itemCount: 10)
+    );
+    return [text1, text2, exp1, text3, exp2, text4, exp3];
   }
 }
 
