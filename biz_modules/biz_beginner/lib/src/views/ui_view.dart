@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:biz_beginner/src/controllers/ui_controller.dart';
 import 'package:biz_common/biz_common.dart';
 import 'package:flutter/material.dart';
@@ -7,6 +9,7 @@ class UIView extends GetView<UIController> {
   late UIController controller;
 
   TextEditingController _textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     controller = Get.isRegistered<UIController>()
@@ -127,7 +130,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'Form和TextFormField') {
       BottomSheetUtil.showBottomSheet(FormExample());
     } else if (title == 'FormField') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(FormFieldExample());
     } else if (title == 'ElevatedButton') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'TextButton') {
@@ -481,9 +484,10 @@ class UIView extends GetView<UIController> {
 
     Widget exp1 = Row(children: [
       Container(color: Colors.red, width: 50, height: 50),
-      Expanded(child: Container(color: Colors.blue, height: 50, child: Text(
-      'Expanded填充剩余空间'))),
-      Container(color: Colors.green,width: 50,height: 50)
+      Expanded(
+          child: Container(
+              color: Colors.blue, height: 50, child: Text('Expanded填充剩余空间'))),
+      Container(color: Colors.green, width: 50, height: 50)
     ]);
 
     Widget text2 = Text('''
@@ -493,7 +497,7 @@ class UIView extends GetView<UIController> {
     Widget exp2 = Row(
       children: <Widget>[
         Expanded(
-          flex: 2,  // 占总空间的 2/3
+          flex: 2, // 占总空间的 2/3
           child: Container(
             color: Colors.red,
             height: 50,
@@ -501,7 +505,7 @@ class UIView extends GetView<UIController> {
           ),
         ),
         Expanded(
-          flex: 1,  // 占总空间的 1/3
+          flex: 1, // 占总空间的 1/3
           child: Container(
             color: Colors.blue,
             height: 50,
@@ -509,7 +513,7 @@ class UIView extends GetView<UIController> {
           ),
         ),
         Expanded(
-          flex: 3,  // 占总空间的 1/3
+          flex: 3, // 占总空间的 1/3
           child: Container(
             color: Colors.green,
             height: 50,
@@ -550,32 +554,26 @@ class UIView extends GetView<UIController> {
       ],
     );
 
-    Widget exp4 = Row(
-      children: <Widget>[
-        Container(
-          color: Colors.red,
-          width: 50,
+    Widget exp4 = Row(children: <Widget>[
+      Container(
+        color: Colors.red,
+        width: 50,
+        height: 50,
+      ),
+      Flexible(
+        flex: 1,
+        child: Container(
+          color: Colors.blue,
           height: 50,
+          child: Text('Flexible flex:2'),
         ),
-        Flexible(
-          flex: 1,
-          child: Container(
-            color: Colors.blue,
-            height: 50,
-            child: Text('Flexible flex:2'),
-          ),
-        ),
-        Flexible(
+      ),
+      Flexible(
           flex: 3,
           child: Container(
-            color: Colors.green,
-            height: 50,
-            child: Text('Flexible flex:1')
-          )
-        )
-      ]
-    );
-    return [text1, exp1, text2, exp2, text3, exp3, SizedBox(height: 30),exp4];
+              color: Colors.green, height: 50, child: Text('Flexible flex:1')))
+    ]);
+    return [text1, exp1, text2, exp2, text3, exp3, SizedBox(height: 30), exp4];
   }
 
   ///ListView组件
@@ -589,19 +587,16 @@ class UIView extends GetView<UIController> {
     ListView提供了几种常见的创建方式，每一种都有不同的使用场景。
     ''');
 
-    Widget text2 = Text(
-      '''
+    Widget text2 = Text('''
       基本的ListView
       直接将列表数据放在children属性，适合数据量较小的情况。
       因为数据量大，直接创建了很多子元素出来。
-      '''
-    );
+      ''');
     Widget exp1 = Container(
       height: 100,
       decoration: BoxDecoration(
-        color: Colors.grey ,
-        border: Border.all(color: Colors.black, width: 2.0)
-      ),
+          color: Colors.grey,
+          border: Border.all(color: Colors.black, width: 2.0)),
       child: ListView(
         children: [
           ListTile(title: Text('Item 1')),
@@ -610,22 +605,19 @@ class UIView extends GetView<UIController> {
         ],
       ),
     );
-    Widget text3 = Text(
-        '''
+    Widget text3 = Text('''
        ListView.builder(适合长列表)
        当你需要展示动态生成的内容，比如从网络请求获得数据，或者列表
        内容非常多时，使用ListView.builder会更加高效。
        ListView.builder只会构建当前屏幕内的子项，并且随着用户
        滚动，新的列表项目会被构建出来。
-      '''
-    );
+      ''');
 
     Widget exp2 = Container(
       height: 200,
       decoration: BoxDecoration(
-        color: Colors.grey,
-        border: Border.all(color: Colors.black, width: 2)
-      ),
+          color: Colors.grey,
+          border: Border.all(color: Colors.black, width: 2)),
       child: ListView.builder(
           itemCount: 100,
           itemBuilder: (BuildContext context, int index) {
@@ -633,51 +625,43 @@ class UIView extends GetView<UIController> {
           }),
     );
 
-    Widget text4 = Text(
-        '''
+    Widget text4 = Text('''
        ListView.separated 带分隔符的列表
-      '''
-    );
+      ''');
     Widget exp3 = Container(
         height: 100,
         decoration: BoxDecoration(
             color: Colors.grey,
             border: Border.all(color: Colors.black, width: 2)),
         child: ListView.separated(
-          itemBuilder: (context, index) {
-            return ListTile(title: Text('Item: $index'));
-          },
-          separatorBuilder: (context, index) {
-            return Divider();
-          },
-          itemCount: 10)
-    );
+            itemBuilder: (context, index) {
+              return ListTile(title: Text('Item: $index'));
+            },
+            separatorBuilder: (context, index) {
+              return Divider();
+            },
+            itemCount: 10));
     return [text1, text2, exp1, text3, exp2, text4, exp3];
   }
 
   ///GridView
   List<Widget> GridViewExample() {
-    Widget text1 = Text(
-      '''
+    Widget text1 = Text('''
       GridView是Flutter用于展示网格布局的控件，类似于ListView,
       将子元素按照行列的方式排列。
       
       GridView提供了几种常见的构建方式，每种方式适用于不同的使用场景。
-      '''
-    );
-    Widget text2 = Text(
-        '''
+      ''');
+    Widget text2 = Text('''
       基本的GridView
       直接通过 children 属性来构建网格。
-      '''
-    );
+      ''');
     Widget exp1 = Container(
       width: 300,
       height: 300,
       decoration: BoxDecoration(
-        color: Colors.white70,
-        border: Border.all(width: 2.0, color: Colors.black)
-      ),
+          color: Colors.white70,
+          border: Border.all(width: 2.0, color: Colors.black)),
       child: GridView(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           crossAxisCount: 3, //每行显示3个项
@@ -707,25 +691,24 @@ class UIView extends GetView<UIController> {
         width: 300,
         height: 300,
         decoration: BoxDecoration(
-        color: Colors.white70,
-        border: Border.all(width: 2.0, color: Colors.black),
-    ),
-      child: GridView.extent(
-        maxCrossAxisExtent: 70, //每个项的最大宽度
-        crossAxisSpacing: 10,
-        mainAxisSpacing: 10,
-        children: [
-          Container(color: Colors.red),
-          Container(color: Colors.green),
-          Container(color: Colors.yellow),
-          Container(color: Colors.grey),
-          Container(color: Colors.blue),
-          Container(color: Colors.black),
-          Container(color: Colors.orangeAccent),
-          Container(color: Colors.deepPurple),
-        ],
-      )
-    );
+          color: Colors.white70,
+          border: Border.all(width: 2.0, color: Colors.black),
+        ),
+        child: GridView.extent(
+          maxCrossAxisExtent: 70, //每个项的最大宽度
+          crossAxisSpacing: 10,
+          mainAxisSpacing: 10,
+          children: [
+            Container(color: Colors.red),
+            Container(color: Colors.green),
+            Container(color: Colors.yellow),
+            Container(color: Colors.grey),
+            Container(color: Colors.blue),
+            Container(color: Colors.black),
+            Container(color: Colors.orangeAccent),
+            Container(color: Colors.deepPurple),
+          ],
+        ));
 
     Widget text4 = Text('''
       GridView.extent(自定义每个项的最大宽度)
@@ -737,9 +720,8 @@ class UIView extends GetView<UIController> {
       width: 300,
       height: 150,
       decoration: BoxDecoration(
-        color: Colors.black,
-        border: Border.all(color: Colors.black, width: 2.0)
-      ),
+          color: Colors.black,
+          border: Border.all(color: Colors.black, width: 2.0)),
       child: GridView.extent(
         maxCrossAxisExtent: 90, //每个项的最大宽度
         crossAxisSpacing: 10,
@@ -771,16 +753,12 @@ class UIView extends GetView<UIController> {
         hintText: '请输入姓名',
         border: OutlineInputBorder(),
       ),
-      onChanged: (text) {
-
-      },
-      onSubmitted: (text) {
-
-      },
+      onChanged: (text) {},
+      onSubmitted: (text) {},
     );
 
     Widget exp2 = TextField(
-      obscureText: true,  // 隐藏输入的文本
+      obscureText: true, // 隐藏输入的文本
       decoration: InputDecoration(
         hintText: '请输入密码',
       ),
@@ -820,12 +798,25 @@ class UIView extends GetView<UIController> {
 
     Widget exp1 = Container(
       decoration: BoxDecoration(
-        color: Colors.white,
-        border: Border.all(color: Colors.black, width: 2)
-      ),
+          color: Colors.white,
+          border: Border.all(color: Colors.black, width: 2)),
       child: MyForm(),
     );
     return [text1, exp1];
+  }
+
+  ///FormFieldExample
+  List<Widget> FormFieldExample() {
+    Widget text1 = Text('''
+      FormField 是一个可以嵌套在 Form 组件中的 Widget，用来处理单个字段的状态、验证和显示错误信息。
+      FormField 提供了自定义输入框（如 TextFormField）的高级管理功能。
+      ''');
+    Widget exp1 = MyFormFieldExp1();
+
+    Widget text2 = Text('使用FormField实现复选框');
+
+    Widget exp2 = MyFormFieldExp2();
+    return [text1, exp1, text2, exp2];
   }
 }
 
@@ -851,9 +842,9 @@ class MyForm extends StatefulWidget {
 }
 
 class _MyFormState extends State<MyForm> {
-
   //创建一个GlobalKey，用来访问FormState
   final _formKey = GlobalKey<FormState>();
+
   //控制器 用来获取TextFormField的输入值
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _pwdController = TextEditingController();
@@ -864,10 +855,11 @@ class _MyFormState extends State<MyForm> {
       return '请输入邮箱地址';
     }
     //简单的邮箱正则表达式验证
-    String emailPattern = r"^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
+    String emailPattern =
+        r"^[a-zA-Z0-9]+[a-zA-Z0-9._%+-]*@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$";
     RegExp regex = RegExp(emailPattern);
 
-    if(!regex.hasMatch(val)) {
+    if (!regex.hasMatch(val)) {
       return '请输入有效的邮箱地址';
     }
     return null;
@@ -892,6 +884,7 @@ class _MyFormState extends State<MyForm> {
           ''');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -901,20 +894,14 @@ class _MyFormState extends State<MyForm> {
         children: <Widget>[
           TextFormField(
             controller: _emailController,
-            decoration: InputDecoration(
-              labelText: '邮箱',
-              hintText: '请输入邮箱地址'
-            ),
+            decoration: InputDecoration(labelText: '邮箱', hintText: '请输入邮箱地址'),
             keyboardType: TextInputType.emailAddress,
             validator: _validateEmail,
           ),
           SizedBox(height: 17),
           TextFormField(
             controller: _pwdController,
-            decoration: InputDecoration(
-              labelText: '密码',
-              hintText: '请输入密码'
-            ),
+            decoration: InputDecoration(labelText: '密码', hintText: '请输入密码'),
             obscureText: true,
             validator: _validatePwd,
           ),
@@ -923,5 +910,112 @@ class _MyFormState extends State<MyForm> {
         ],
       ),
     );
+  }
+}
+
+class MyFormFieldExp1 extends StatefulWidget {
+  const MyFormFieldExp1({super.key});
+
+  @override
+  State<MyFormFieldExp1> createState() => _MyFormFieldExp1State();
+}
+
+class _MyFormFieldExp1State extends State<MyFormFieldExp1> {
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+
+  //表单验证函数
+  String? _validateInput(String? val) {
+    if (val == null || val.isEmpty) {
+      return '请输入内容';
+    }
+    return null;
+  }
+
+  //提交表单
+  void _submitForm() {
+    if (_formKey.currentState?.validate() ?? false) {
+      print('表单验证通过');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+      key: _formKey,
+      child: Column(children: [
+        FormField(builder: (FormFieldState<String> field) {
+          return TextFormField(
+            initialValue: '',
+            validator: _validateInput,
+            onSaved: (String? val) {
+              print('保存的值: $val');
+            },
+            decoration: InputDecoration(
+                labelText: '请输入内容',
+                errorText: field.hasError ? field.errorText : null),
+            onChanged: field.didChange,
+          );
+        }),
+        SizedBox(height: 20),
+        ElevatedButton(onPressed: _submitForm, child: Text('提交'))
+      ]),
+    );
+  }
+}
+
+class MyFormFieldExp2 extends StatefulWidget {
+  const MyFormFieldExp2({super.key});
+
+  @override
+  State<MyFormFieldExp2> createState() => _MyFormFieldExp2State();
+}
+
+class _MyFormFieldExp2State extends State<MyFormFieldExp2> {
+  final GlobalKey<FormState> _formKey = GlobalKey();
+  bool _isChecked = false;
+
+  void _submitForm() {
+    if (_formKey.currentState?.validate() ?? false) {
+      print('复选框状态：$_isChecked');
+    }
+  }
+  
+  @override
+  Widget build(BuildContext context) {
+    return Form(
+        key: _formKey,
+        child: Column(
+          children: [
+            FormField(
+              initialValue: _isChecked,
+              validator: (val) {
+                if (val == false) {
+                  return '请勾选同意';
+                }
+                return null;
+              },
+              onSaved: (val) {
+                setState(() {
+                  _isChecked = val ?? false;
+                });
+              },
+              builder: (FormFieldState<bool> field) {
+                return Row(
+                  children: <Widget>[
+                    Checkbox(value: field.value, onChanged: (bool? val) {
+                      field.didChange(val);
+                    }),
+                    Text('同意条款和条件'),
+                    if (field.hasError) Padding(padding: EdgeInsets.only(left: 10),
+                    child: Text(field.errorText ?? '', style: TextStyle(color: Colors.red),),
+                    )
+                  ],
+                );
+              },
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(onPressed: _submitForm, child: Text('提交'))
+          ],
+        ));
   }
 }
