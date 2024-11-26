@@ -120,7 +120,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'ListView') {
       BottomSheetUtil.showBottomSheet(listViewExample());
     } else if (title == 'GridView') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(GridViewExample());
     } else if (title == 'TextField') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Form') {
@@ -472,6 +472,7 @@ class UIView extends GetView<UIController> {
     return [text1, stack1];
   }
 
+  ///Expanded组件
   List<Widget> expandedExample() {
     Widget text1 = Text('''
     Expanded通常与Row\Column\Flex一起使用，用于在主轴上扩展并填充剩余空间。
@@ -576,6 +577,7 @@ class UIView extends GetView<UIController> {
     return [text1, exp1, text2, exp2, text3, exp3, SizedBox(height: 30),exp4];
   }
 
+  ///ListView组件
   List<Widget> listViewExample() {
     Widget text1 = Text('''
     ListView是可滚动的列表，允许在垂直或水平方向上滚动。
@@ -649,6 +651,107 @@ class UIView extends GetView<UIController> {
           },
           itemCount: 10)
     );
+    return [text1, text2, exp1, text3, exp2, text4, exp3];
+  }
+
+  ///GridView
+  List<Widget> GridViewExample() {
+    Widget text1 = Text(
+      '''
+      GridView是Flutter用于展示网格布局的控件，类似于ListView,
+      将子元素按照行列的方式排列。
+      
+      GridView提供了几种常见的构建方式，每种方式适用于不同的使用场景。
+      '''
+    );
+    Widget text2 = Text(
+        '''
+      基本的GridView
+      直接通过 children 属性来构建网格。
+      '''
+    );
+    Widget exp1 = Container(
+      width: 300,
+      height: 300,
+      decoration: BoxDecoration(
+        color: Colors.white70,
+        border: Border.all(width: 2.0, color: Colors.black)
+      ),
+      child: GridView(
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 3, //每行显示3个项
+          crossAxisSpacing: 10, //列之间的间距
+          mainAxisSpacing: 10, //行之间的间距
+        ),
+        children: [
+          Container(color: Colors.red),
+          Container(color: Colors.green),
+          Container(color: Colors.yellow),
+          Container(color: Colors.grey),
+          Container(color: Colors.blue),
+          Container(color: Colors.black),
+          Container(color: Colors.orangeAccent),
+          Container(color: Colors.deepPurple),
+        ],
+      ),
+    );
+
+    Widget text3 = Text('''
+    GridView.builder 适合动态数据
+    当你动态生成网格数据，或者数据量较大时，使用GridView.builder更为高效。
+    它会根据需要创建网格项，只渲染可见的元素，从而提高性能。
+    ''');
+
+    Widget exp2 = Container(
+        width: 300,
+        height: 300,
+        decoration: BoxDecoration(
+        color: Colors.white70,
+        border: Border.all(width: 2.0, color: Colors.black),
+    ),
+      child: GridView.extent(
+        maxCrossAxisExtent: 70, //每个项的最大宽度
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        children: [
+          Container(color: Colors.red),
+          Container(color: Colors.green),
+          Container(color: Colors.yellow),
+          Container(color: Colors.grey),
+          Container(color: Colors.blue),
+          Container(color: Colors.black),
+          Container(color: Colors.orangeAccent),
+          Container(color: Colors.deepPurple),
+        ],
+      )
+    );
+
+    Widget text4 = Text('''
+      GridView.extent(自定义每个项的最大宽度)
+      用于不确定列数时，它会根据给定的最大宽度和屏幕的可用宽度自动计算每行放多少个单元格
+      这样，开发者不需要手动指定每行多少个项，Flutter 会自动优化布局。
+    ''');
+
+    Widget exp3 = Container(
+      width: 300,
+      height: 150,
+      decoration: BoxDecoration(
+        color: Colors.black,
+        border: Border.all(color: Colors.black, width: 2.0)
+      ),
+      child: GridView.extent(
+        maxCrossAxisExtent: 90, //每个项的最大宽度
+        crossAxisSpacing: 10,
+        mainAxisSpacing: 10,
+        children: [
+          Container(color: Colors.red),
+          Container(color: Colors.green),
+          Container(color: Colors.blue),
+          Container(color: Colors.yellow),
+        ],
+      ),
+    );
+
     return [text1, text2, exp1, text3, exp2, text4, exp3];
   }
 }
