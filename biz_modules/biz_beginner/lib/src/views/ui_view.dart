@@ -24,7 +24,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '图片和文本'),
         ...List.generate(
             controller.commonWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.commonWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -33,7 +34,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '布局组件'),
         ...List.generate(
             controller.layoutWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.layoutWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -42,7 +44,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '输入组件'),
         ...List.generate(
             controller.inputWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.inputWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -51,7 +54,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '按钮和交互组件'),
         ...List.generate(
             controller.interactWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.interactWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -60,7 +64,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '导航组件'),
         ...List.generate(
             controller.navWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.navWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -69,7 +74,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '动画组件'),
         ...List.generate(
             controller.aniWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.aniWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -78,7 +84,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '其它组件'),
         ...List.generate(
             controller.othersWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.othersWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -138,7 +145,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'Switch和CheckBox') {
       BottomSheetUtil.showBottomSheet(SwitchExample());
     } else if (title == 'Navigator和MaterialPageRoute') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(NavigatorExample());
     } else if (title == 'BottomNavigationBar') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'TabBar') {
@@ -205,9 +212,9 @@ class UIView extends GetView<UIController> {
       color: Colors.red,
       child: Text(
         '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距',
+            '每个字之间有间距，行与行之间有间距'
+            '每个字之间有间距，行与行之间有间距'
+            '每个字之间有间距，行与行之间有间距',
         style: TextStyle(
           fontSize: 18,
           letterSpacing: 3.0, // 设置字母间距
@@ -218,17 +225,19 @@ class UIView extends GetView<UIController> {
 
     Widget text7 = RichText(
         text: TextSpan(children: <TextSpan>[
-      TextSpan(
-          text: 'Flutter是一个',
-          style: TextStyle(color: Colors.black, fontSize: 20)),
-      TextSpan(
-          text: '很强大的框架',
-          style: TextStyle(
-              color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)),
-      TextSpan(
-          text: ', 适用于多平台开发',
-          style: TextStyle(color: Colors.red, fontSize: 20)),
-    ]));
+          TextSpan(
+              text: 'Flutter是一个',
+              style: TextStyle(color: Colors.black, fontSize: 20)),
+          TextSpan(
+              text: '很强大的框架',
+              style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
+          TextSpan(
+              text: ', 适用于多平台开发',
+              style: TextStyle(color: Colors.red, fontSize: 20)),
+        ]));
 
     Widget text8 = Text(
       '这是一个很长的文本案例，超过一定行数后会被截断这是一个很长的文本案例，超过一定行数后会被截断这是一个很长的文本案例，超过一定行数后会被截断',
@@ -480,7 +489,9 @@ class UIView extends GetView<UIController> {
       Container(color: Colors.red, width: 50, height: 50),
       Expanded(
           child: Container(
-              color: Colors.blue, height: 50, child: Text('Expanded填充剩余空间'))),
+              color: Colors.blue,
+              height: 50,
+              child: Text('Expanded填充剩余空间'))),
       Container(color: Colors.green, width: 50, height: 50)
     ]);
 
@@ -874,17 +885,17 @@ class UIView extends GetView<UIController> {
     Widget exp4 = Container(
       child: Material(
           child: InkWell(
-        child: Container(
-          width: 80,
-          height: 80,
-          child: Text('InkWell'),
-        ),
-        splashColor: Colors.red, // 设置水波纹颜色
-        // highlightColor: Colors.green,  // 设置高亮颜色
-        onTap: () {
-          Get.snackbar('InkWell', 'InkWell被点击了');
-        },
-      )),
+            child: Container(
+              width: 80,
+              height: 80,
+              child: Text('InkWell'),
+            ),
+            splashColor: Colors.red, // 设置水波纹颜色
+            // highlightColor: Colors.green,  // 设置高亮颜色
+            onTap: () {
+              Get.snackbar('InkWell', 'InkWell被点击了');
+            },
+          )),
     );
 
     return [text1, exp1, text2, exp2, text3, exp3, text4, exp4];
@@ -927,6 +938,23 @@ class UIView extends GetView<UIController> {
     Widget exp3 = MyCheckBox(val: false);
     Widget exp4 = MyCheckBoxListTile(val: false);
     return [exp1, exp2, exp3, exp4];
+  }
+
+  ///Navigator
+  List<Widget> NavigatorExample() {
+    Widget text1 = Text(
+        '''
+      Navigator是一个非常重要的组件，它负责管理应用的页面栈并提供页面的导航功能。
+      MaterialPageRoute 是实现页面跳转时常用的路由类，它支持与 Material Design 风格的页面转换动画。
+     
+      Navigator 维护着一个页面栈，用户通过 Navigator.push 和 Navigator.pop 等方法来管理页面栈，从而进行页面跳转和返回。
+      MaterialPageRoute 是一个典型的页面路由类。
+      '''
+    );
+
+    Widget exp1 = FirstPage();
+
+    return [text1, exp1];
   }
 }
 
@@ -1004,14 +1032,16 @@ class _MyFormState extends State<MyForm> {
         children: <Widget>[
           TextFormField(
             controller: _emailController,
-            decoration: InputDecoration(labelText: '邮箱', hintText: '请输入邮箱地址'),
+            decoration: InputDecoration(
+                labelText: '邮箱', hintText: '请输入邮箱地址'),
             keyboardType: TextInputType.emailAddress,
             validator: _validateEmail,
           ),
           SizedBox(height: 17),
           TextFormField(
             controller: _pwdController,
-            decoration: InputDecoration(labelText: '密码', hintText: '请输入密码'),
+            decoration: InputDecoration(
+                labelText: '密码', hintText: '请输入密码'),
             obscureText: true,
             validator: _validatePwd,
           ),
@@ -1229,3 +1259,47 @@ class _MyCheckBoxListTileState extends State<MyCheckBoxListTile> {
         });
   }
 }
+
+
+class FirstPage extends StatelessWidget {
+  const FirstPage({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 400,
+        width: 400,
+        color: Colors.blue,
+        child: Scaffold(
+          appBar: AppBar(title: Text('第一页'),),
+          body: Center(
+            child: TextButton(onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => SecondPage(message: 'FirstPage Data',)),
+              ).then((data) {
+                Get.snackbar('第一页收到第二页返回的数据', data);
+              });
+            }, child: Text('第一页')),
+          ),
+        ),
+
+    );
+  }
+}
+
+class SecondPage extends StatelessWidget {
+  SecondPage({super.key, required this.message});
+  final String message;
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text('第二页')),
+      body: Center(
+        child: TextButton(onPressed: () {
+          Navigator.pop(context, '第二页返回的参数');
+        }, child: Text('第二页, 收到前一页传来的参数: $message')),
+      ),
+    );
+  }
+}
+
