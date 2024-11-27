@@ -131,14 +131,8 @@ class UIView extends GetView<UIController> {
       BottomSheetUtil.showBottomSheet(FormExample());
     } else if (title == 'FormField') {
       BottomSheetUtil.showBottomSheet(FormFieldExample());
-    } else if (title == 'ElevatedButton') {
-      BottomSheetUtil.showBottomSheet([]);
-    } else if (title == 'TextButton') {
-      BottomSheetUtil.showBottomSheet([]);
-    } else if (title == 'OutlinedButton') {
-      BottomSheetUtil.showBottomSheet([]);
-    } else if (title == 'IconButton') {
-      BottomSheetUtil.showBottomSheet([]);
+    } else if (title == '一些自带的Buttons') {
+      BottomSheetUtil.showBottomSheet(ButtonsExample());
     } else if (title == 'Switch') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Checkbox') {
@@ -818,6 +812,83 @@ class UIView extends GetView<UIController> {
     Widget exp2 = MyFormFieldExp2();
     return [text1, exp1, text2, exp2];
   }
+
+  ///ElevatedButton
+  List<Widget> ButtonsExample() {
+    Widget text1 = Text('''
+        ElebatedButton
+        ElevatedButton 按钮有一个高亮的背景色和投影效果，能够给用户一种按钮被按下的视觉反馈。
+        ''');
+
+    Widget exp1 = ElevatedButton(
+        style: ElevatedButton.styleFrom(
+            foregroundColor: Colors.blue,
+            backgroundColor: Colors.green,
+            overlayColor: Colors.deepPurple),
+        onPressed: () {
+          Get.snackbar('ElevatedButton', '按钮被点击');
+        },
+        child: Text('ElevatedButton'));
+
+    Widget text2 = Text('''
+      TextButton
+      TextButton用于创建一个文本按钮（没有按钮的背景色）
+      ''');
+
+    Widget exp2 = TextButton(
+      onPressed: () {
+        Get.snackbar('TextButton', 'TextButton被点击了');
+      },
+      child: Text('TextButton'),
+      style: TextButton.styleFrom(
+        foregroundColor: Colors.red, //设置文本颜色
+        shadowColor: Colors.blue, //阴影颜色
+        elevation: 10.0,
+      ).copyWith(backgroundColor: WidgetStateProperty.resolveWith((states) {
+        if (states.contains(WidgetState.pressed)) {
+          return Colors.deepPurple; //按下时的背景颜色
+        }
+        return Colors.blue; //默认背景颜色
+      })),
+    );
+
+    Widget text3 = Text('''
+      IconButton
+      IconButton 通过图标来展示交互式按钮
+    ''');
+
+    Widget exp3 = IconButton(
+        onPressed: () {
+          Get.snackbar('IconButton', 'IconButton被点击了');
+        },
+        icon: Icon(
+          Icons.add_alert,
+          color: Colors.blue,
+        ));
+
+    Widget text4 = Text('''
+      InkWell
+      InkWell点击时提供水波纹效果
+      ''');
+
+    Widget exp4 = Container(
+      child: Material(
+          child: InkWell(
+        child: Container(
+          width: 80,
+          height: 80,
+          child: Text('InkWell'),
+        ),
+        splashColor: Colors.red, // 设置水波纹颜色
+        // highlightColor: Colors.green,  // 设置高亮颜色
+        onTap: () {
+          Get.snackbar('InkWell', 'InkWell被点击了');
+        },
+      )),
+    );
+
+    return [text1, exp1, text2, exp2, text3, exp3, text4, exp4];
+  }
 }
 
 class TitleWidget extends StatelessWidget {
@@ -979,7 +1050,7 @@ class _MyFormFieldExp2State extends State<MyFormFieldExp2> {
       print('复选框状态：$_isChecked');
     }
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Form(
@@ -1002,13 +1073,20 @@ class _MyFormFieldExp2State extends State<MyFormFieldExp2> {
               builder: (FormFieldState<bool> field) {
                 return Row(
                   children: <Widget>[
-                    Checkbox(value: field.value, onChanged: (bool? val) {
-                      field.didChange(val);
-                    }),
+                    Checkbox(
+                        value: field.value,
+                        onChanged: (bool? val) {
+                          field.didChange(val);
+                        }),
                     Text('同意条款和条件'),
-                    if (field.hasError) Padding(padding: EdgeInsets.only(left: 10),
-                    child: Text(field.errorText ?? '', style: TextStyle(color: Colors.red),),
-                    )
+                    if (field.hasError)
+                      Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: Text(
+                          field.errorText ?? '',
+                          style: TextStyle(color: Colors.red),
+                        ),
+                      )
                   ],
                 );
               },

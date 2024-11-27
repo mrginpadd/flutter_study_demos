@@ -27,10 +27,7 @@ class UIController extends GetxController {
 
   ///按钮和交互组件
   final List<String> interactWidgets = [
-    'ElevatedButton',
-    'TextButton',
-    'OutlinedButton',
-    'IconButton',
+    '一些自带的Buttons',
     'GestureDetector',
     'Switch',
     'Checkbox',
