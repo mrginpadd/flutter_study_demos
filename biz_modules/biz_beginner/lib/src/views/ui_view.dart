@@ -135,10 +135,8 @@ class UIView extends GetView<UIController> {
       BottomSheetUtil.showBottomSheet(ButtonsExample());
     } else if (title == 'GestureDetector') {
       BottomSheetUtil.showBottomSheet(GestureDetectorExample());
-    } else if (title == 'Switch') {
-      BottomSheetUtil.showBottomSheet([]);
-    } else if (title == 'Checkbox') {
-      BottomSheetUtil.showBottomSheet([]);
+    } else if (title == 'Switch和CheckBox') {
+      BottomSheetUtil.showBottomSheet(SwitchExample());
     } else if (title == 'Navigator和MaterialPageRoute') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'BottomNavigationBar') {
@@ -894,13 +892,11 @@ class UIView extends GetView<UIController> {
 
   ///GestureDetector
   List<Widget> GestureDetectorExample() {
-    Widget text1 = Text(
-      '''
+    Widget text1 = Text('''
       GestureDetector 是 Flutter 中用于检测用户手势的一个小部件。
       通过 GestureDetector，你可以处理用户的各种触摸事件，
       比如点击、双击、拖动、滑动等
-      '''
-    );
+      ''');
 
     Widget exp1 = GestureDetector(
       onTap: () {
@@ -916,13 +912,21 @@ class UIView extends GetView<UIController> {
         print('Pan update: ${details.localPosition}');
       },
       child: Container(
-        color: Colors.blue,
-        width:200,
-        height: 200,
-        child:Center(child: Text('GestureDector'))
-      ),
+          color: Colors.blue,
+          width: 200,
+          height: 200,
+          child: Center(child: Text('GestureDector'))),
     );
     return [text1, exp1];
+  }
+
+  ///Switch组件
+  List<Widget> SwitchExample() {
+    Widget exp1 = MySwitch(val: false);
+    Widget exp2 = MySwitchListTile(val: false);
+    Widget exp3 = MyCheckBox(val: false);
+    Widget exp4 = MyCheckBoxListTile(val: false);
+    return [exp1, exp2, exp3, exp4];
   }
 }
 
@@ -1130,5 +1134,98 @@ class _MyFormFieldExp2State extends State<MyFormFieldExp2> {
             ElevatedButton(onPressed: _submitForm, child: Text('提交'))
           ],
         ));
+  }
+}
+
+class MySwitch extends StatefulWidget {
+  MySwitch({super.key, required this.val});
+
+  bool val;
+
+  @override
+  State<MySwitch> createState() => _MySwitchState();
+}
+
+class _MySwitchState extends State<MySwitch> {
+  @override
+  Widget build(BuildContext context) {
+    return Switch(
+        value: widget.val,
+        onChanged: (val) {
+          setState(() {
+            widget.val = val;
+          });
+        });
+  }
+}
+
+class MySwitchListTile extends StatefulWidget {
+  MySwitchListTile({super.key, required this.val});
+
+  bool val;
+
+  @override
+  State<MySwitchListTile> createState() => _MySwitchListTileState();
+}
+
+class _MySwitchListTileState extends State<MySwitchListTile> {
+  @override
+  Widget build(BuildContext context) {
+    return SwitchListTile(
+        title: Text('空调开启'),
+        subtitle: Text('开启了就行'),
+        value: widget.val,
+        onChanged: (val) {
+          setState(() {
+            widget.val = val;
+          });
+        });
+  }
+}
+
+class MyCheckBox extends StatefulWidget {
+  MyCheckBox({super.key, required this.val});
+
+  bool val;
+
+  @override
+  State<MyCheckBox> createState() => _MyCheckBoxState();
+}
+
+class _MyCheckBoxState extends State<MyCheckBox> {
+  @override
+  Widget build(BuildContext context) {
+    return Checkbox(
+        value: widget.val,
+        onChanged: (val) {
+          setState(() {
+            widget.val = val ?? false;
+          });
+        });
+  }
+}
+
+class MyCheckBoxListTile extends StatefulWidget {
+  MyCheckBoxListTile({super.key, required this.val});
+
+  bool val;
+
+  @override
+  State<MyCheckBoxListTile> createState() => _MyCheckBoxListTileState();
+}
+
+class _MyCheckBoxListTileState extends State<MyCheckBoxListTile> {
+  @override
+  Widget build(BuildContext context) {
+    return CheckboxListTile(
+        title: Text('同意条款'),
+        controlAffinity: ListTileControlAffinity.trailing,
+        // 控制复选框的位置，leading是左侧，trailing是右侧
+        value: widget.val,
+        onChanged: (val) {
+          setState(() {
+            widget.val = val ?? false;
+          });
+        });
   }
 }

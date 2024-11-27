@@ -29,8 +29,7 @@ class UIController extends GetxController {
   final List<String> interactWidgets = [
     '一些自带的Buttons',
     'GestureDetector',
-    'Switch',
-    'Checkbox',
+    'Switch和CheckBox',
   ];
 
   ///导航组件
