@@ -133,6 +133,8 @@ class UIView extends GetView<UIController> {
       BottomSheetUtil.showBottomSheet(FormFieldExample());
     } else if (title == '一些自带的Buttons') {
       BottomSheetUtil.showBottomSheet(ButtonsExample());
+    } else if (title == 'GestureDetector') {
+      BottomSheetUtil.showBottomSheet(GestureDetectorExample());
     } else if (title == 'Switch') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Checkbox') {
@@ -888,6 +890,39 @@ class UIView extends GetView<UIController> {
     );
 
     return [text1, exp1, text2, exp2, text3, exp3, text4, exp4];
+  }
+
+  ///GestureDetector
+  List<Widget> GestureDetectorExample() {
+    Widget text1 = Text(
+      '''
+      GestureDetector 是 Flutter 中用于检测用户手势的一个小部件。
+      通过 GestureDetector，你可以处理用户的各种触摸事件，
+      比如点击、双击、拖动、滑动等
+      '''
+    );
+
+    Widget exp1 = GestureDetector(
+      onTap: () {
+        print('onTap');
+      },
+      onDoubleTap: () {
+        print('Double Tapped');
+      },
+      onLongPress: () {
+        print('Long Pressed');
+      },
+      onPanUpdate: (details) {
+        print('Pan update: ${details.localPosition}');
+      },
+      child: Container(
+        color: Colors.blue,
+        width:200,
+        height: 200,
+        child:Center(child: Text('GestureDector'))
+      ),
+    );
+    return [text1, exp1];
   }
 }
 
