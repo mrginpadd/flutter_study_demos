@@ -142,7 +142,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'BottomNavigationBar') {
       BottomSheetUtil.showBottomSheet(BottomNavigationBarExample());
     } else if (title == 'TabBar') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(TabBarExample());
     } else if (title == 'Drawer') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'AnimatedContainer') {
@@ -1603,3 +1603,135 @@ class _BottomNavExample3State extends State<BottomNavExample3> {
     );
   }
 }
+
+
+List<Widget> TabBarExample() {
+  Widget text1 = Text(
+    '''
+    TabBar用于创建可切换的选项卡界面，通常与 TabController 和 TabBarView 配合使用。
+    TabBar 允许用户在不同的内容区域之间进行切换，常见于应用的顶部导航或底部导航栏。
+    '''
+  );
+
+  Widget exp1 = MyTabBarExample1();
+  Widget exp2 = MyTabBarExample2();
+  return [text1, exp1, SizedBox(height: 30), exp2];
+}
+
+class MyTabBarExample1 extends StatefulWidget {
+  const MyTabBarExample1({super.key});
+
+  @override
+  State<MyTabBarExample1> createState() => _MyTabBarExample1State();
+}
+
+class _MyTabBarExample1State extends State<MyTabBarExample1> with SingleTickerProviderStateMixin{
+
+  late TabController _tabController;
+
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 10, vsync: this);
+  }
+
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('TabBar Demo'),
+          bottom: TabBar(
+            isScrollable: true,
+            controller: _tabController,
+            tabs: [
+              Tab(icon: Icon(Icons.ac_unit), text: 'Tab1'),
+              Tab(text: 'Tab2'),
+              Tab(text: 'Tab3'),
+              Tab(text: 'Tab4'),
+              Tab(text: 'Tab5'),
+              Tab(text: 'Tab6'),
+              Tab(text: 'Tab3'),
+              Tab(text: 'Tab4'),
+              Tab(text: 'Tab5'),
+              Tab(text: 'Tab6'),
+            ],
+          ),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+          children: [
+            Center(child: Text('Tab1 Content')),
+            Center(child: Text('Tab2 Content')),
+            Center(child: Text('Tab3 Content')),
+            Center(child: Text('Tab4 Content')),
+            Center(child: Text('Tab5 Content')),
+            Center(child: Text('Tab6 Content')),
+            Center(child: Text('Tab3 Content')),
+            Center(child: Text('Tab4 Content')),
+            Center(child: Text('Tab5 Content')),
+            Center(child: Text('Tab6 Content')),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+
+class MyTabBarExample2 extends StatefulWidget {
+  const MyTabBarExample2({super.key});
+
+  @override
+  State<MyTabBarExample2> createState() => _MyTabBarExample2State();
+}
+
+class _MyTabBarExample2State extends State<MyTabBarExample2> with SingleTickerProviderStateMixin{
+  
+  late TabController _tabController;
+  void initState() {
+    super.initState();
+    _tabController = TabController(length: 4, vsync: this);
+  }
+
+  void dispose() {
+    _tabController.dispose();
+    super.dispose();
+  }
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 200,
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text('TabBar在底部'),
+        ),
+        body: TabBarView(
+          controller: _tabController,
+            children: [
+          Center(child: Text('Tab1 Content')),
+          Center(child: Text('Tab2 Content')),
+          Center(child: Text('Tab3 Content')),
+          Center(child: Text('Tab4 Content')),
+        ]),
+        bottomNavigationBar: Material(
+          color: Colors.blue,
+          child: TabBar(
+            controller: _tabController,
+            tabs: [
+              Tab(icon: Icon(Icons.home), text: 'Tab1'),
+              Tab(icon: Icon(Icons.dashboard), text: 'Tab2'),
+              Tab(icon: Icon(Icons.app_registration_outlined), text: 'Tab3'),
+              Tab(icon: Icon(Icons.queue), text: 'Tab4'),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
