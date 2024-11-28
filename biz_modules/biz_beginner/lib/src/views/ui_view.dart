@@ -159,7 +159,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'Hero') {
       BottomSheetUtil.showBottomSheet(HeroExample());
     } else if (title == 'AlertDialog') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(AlertDialogExample());
     }
   }
 
@@ -1867,11 +1867,16 @@ List<Widget> HeroExample() {
   Flutter 会根据这个 tag 标识符在两个页面之间平滑地过渡对应的 widget。
   ''');
 
-  Widget exp1 = TextButton(onPressed: () {
-    Navigator.push(Get.context!, MaterialPageRoute(builder: (context) {
-      return HeroExp1();
-    }));
-  }, child: Text('点击', style: TextStyle(color: Colors.white),));
+  Widget exp1 = TextButton(
+      onPressed: () {
+        Navigator.push(Get.context!, MaterialPageRoute(builder: (context) {
+          return HeroExp1();
+        }));
+      },
+      child: Text(
+        '点击',
+        style: TextStyle(color: Colors.white),
+      ));
   return [text1, exp1];
 }
 
@@ -1893,9 +1898,8 @@ class _FadeTransExp1State extends State<FadeTransExp1>
     _controller =
         AnimationController(vsync: this, duration: Duration(seconds: 2));
     //创建一个动画
-    _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(
-        CurvedAnimation(parent: _controller, curve: Curves.easeInOut)
-    );
+    _opacityAnimation = Tween<double>(begin: 0, end: 1)
+        .animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
   }
 
   void dispose() {
@@ -1912,7 +1916,6 @@ class _FadeTransExp1State extends State<FadeTransExp1>
     }
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -1920,16 +1923,18 @@ class _FadeTransExp1State extends State<FadeTransExp1>
       color: Colors.blue,
       child: GestureDetector(
         onTap: _toggleOpacity,
-        child: FadeTransition(opacity: _opacityAnimation, child: Container(
-          height: 30,
-          color: Colors.red,
-          child: Text('点击Fade动画'),
-        ),),
+        child: FadeTransition(
+          opacity: _opacityAnimation,
+          child: Container(
+            height: 30,
+            color: Colors.red,
+            child: Text('点击Fade动画'),
+          ),
+        ),
       ),
     );
   }
 }
-
 
 class HeroExp1 extends StatelessWidget {
   const HeroExp1({super.key});
@@ -1975,4 +1980,41 @@ class HeroExp2 extends StatelessWidget {
         ),
     );
   }
+
+
+}
+
+
+List<Widget> AlertDialogExample() {
+  Widget text1 = Text('''
+    AlertDialog 是 Flutter 中一个常用的对话框组件，用于向用户展示一个重要的信息或者要求用户做出某种决策。
+    它通常包含一个消息、标题和多个操作按钮（如“确认”或“取消”按钮）。
+    ''');
+  Widget exp1 = TextButton(onPressed: showMyDialog
+      , child: Text('showdialog', style: TextStyle(color: Colors.yellow),)
+  );
+  return [text1, exp1];
+}
+
+void showMyDialog() {
+  showDialog(
+      context: Get.context!,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('AlertDialog使用'),
+          content: Text('AlertDialog content'),
+          actions: [
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('取消')),
+            TextButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('确认')),
+          ],
+        );
+      });
 }
