@@ -24,7 +24,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '图片和文本'),
         ...List.generate(
             controller.commonWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.commonWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -33,7 +34,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '布局组件'),
         ...List.generate(
             controller.layoutWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.layoutWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -42,7 +44,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '输入组件'),
         ...List.generate(
             controller.inputWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.inputWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -51,7 +54,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '按钮和交互组件'),
         ...List.generate(
             controller.interactWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.interactWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -60,7 +64,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '导航组件'),
         ...List.generate(
             controller.navWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.navWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -69,7 +74,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '动画组件'),
         ...List.generate(
             controller.aniWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.aniWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -78,7 +84,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '其它组件'),
         ...List.generate(
             controller.othersWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.othersWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -144,7 +151,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'TabBar') {
       BottomSheetUtil.showBottomSheet(TabBarExample());
     } else if (title == 'Drawer') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(DrawerExample());
     } else if (title == 'AnimatedContainer') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'FadeTransition') {
@@ -205,9 +212,9 @@ class UIView extends GetView<UIController> {
       color: Colors.red,
       child: Text(
         '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距',
+            '每个字之间有间距，行与行之间有间距'
+            '每个字之间有间距，行与行之间有间距'
+            '每个字之间有间距，行与行之间有间距',
         style: TextStyle(
           fontSize: 18,
           letterSpacing: 3.0, // 设置字母间距
@@ -218,17 +225,19 @@ class UIView extends GetView<UIController> {
 
     Widget text7 = RichText(
         text: TextSpan(children: <TextSpan>[
-      TextSpan(
-          text: 'Flutter是一个',
-          style: TextStyle(color: Colors.black, fontSize: 20)),
-      TextSpan(
-          text: '很强大的框架',
-          style: TextStyle(
-              color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)),
-      TextSpan(
-          text: ', 适用于多平台开发',
-          style: TextStyle(color: Colors.red, fontSize: 20)),
-    ]));
+          TextSpan(
+              text: 'Flutter是一个',
+              style: TextStyle(color: Colors.black, fontSize: 20)),
+          TextSpan(
+              text: '很强大的框架',
+              style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
+          TextSpan(
+              text: ', 适用于多平台开发',
+              style: TextStyle(color: Colors.red, fontSize: 20)),
+        ]));
 
     Widget text8 = Text(
       '这是一个很长的文本案例，超过一定行数后会被截断这是一个很长的文本案例，超过一定行数后会被截断这是一个很长的文本案例，超过一定行数后会被截断',
@@ -480,7 +489,9 @@ class UIView extends GetView<UIController> {
       Container(color: Colors.red, width: 50, height: 50),
       Expanded(
           child: Container(
-              color: Colors.blue, height: 50, child: Text('Expanded填充剩余空间'))),
+              color: Colors.blue,
+              height: 50,
+              child: Text('Expanded填充剩余空间'))),
       Container(color: Colors.green, width: 50, height: 50)
     ]);
 
@@ -874,17 +885,17 @@ class UIView extends GetView<UIController> {
     Widget exp4 = Container(
       child: Material(
           child: InkWell(
-        child: Container(
-          width: 80,
-          height: 80,
-          child: Text('InkWell'),
-        ),
-        splashColor: Colors.red, // 设置水波纹颜色
-        // highlightColor: Colors.green,  // 设置高亮颜色
-        onTap: () {
-          Get.snackbar('InkWell', 'InkWell被点击了');
-        },
-      )),
+            child: Container(
+              width: 80,
+              height: 80,
+              child: Text('InkWell'),
+            ),
+            splashColor: Colors.red, // 设置水波纹颜色
+            // highlightColor: Colors.green,  // 设置高亮颜色
+            onTap: () {
+              Get.snackbar('InkWell', 'InkWell被点击了');
+            },
+          )),
     );
 
     return [text1, exp1, text2, exp2, text3, exp3, text4, exp4];
@@ -1048,14 +1059,16 @@ class _MyFormState extends State<MyForm> {
         children: <Widget>[
           TextFormField(
             controller: _emailController,
-            decoration: InputDecoration(labelText: '邮箱', hintText: '请输入邮箱地址'),
+            decoration: InputDecoration(
+                labelText: '邮箱', hintText: '请输入邮箱地址'),
             keyboardType: TextInputType.emailAddress,
             validator: _validateEmail,
           ),
           SizedBox(height: 17),
           TextFormField(
             controller: _pwdController,
-            decoration: InputDecoration(labelText: '密码', hintText: '请输入密码'),
+            decoration: InputDecoration(
+                labelText: '密码', hintText: '请输入密码'),
             obscureText: true,
             validator: _validatePwd,
           ),
@@ -1293,7 +1306,8 @@ class FirstPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SecondPage(
+                      builder: (context) =>
+                          SecondPage(
                             message: 'FirstPage Data',
                           )),
                 ).then((data) {
@@ -1607,7 +1621,7 @@ class _BottomNavExample3State extends State<BottomNavExample3> {
 
 List<Widget> TabBarExample() {
   Widget text1 = Text(
-    '''
+      '''
     TabBar用于创建可切换的选项卡界面，通常与 TabController 和 TabBarView 配合使用。
     TabBar 允许用户在不同的内容区域之间进行切换，常见于应用的顶部导航或底部导航栏。
     '''
@@ -1625,7 +1639,8 @@ class MyTabBarExample1 extends StatefulWidget {
   State<MyTabBarExample1> createState() => _MyTabBarExample1State();
 }
 
-class _MyTabBarExample1State extends State<MyTabBarExample1> with SingleTickerProviderStateMixin{
+class _MyTabBarExample1State extends State<MyTabBarExample1>
+    with SingleTickerProviderStateMixin {
 
   late TabController _tabController;
 
@@ -1638,6 +1653,7 @@ class _MyTabBarExample1State extends State<MyTabBarExample1> with SingleTickerPr
     _tabController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -1690,9 +1706,11 @@ class MyTabBarExample2 extends StatefulWidget {
   State<MyTabBarExample2> createState() => _MyTabBarExample2State();
 }
 
-class _MyTabBarExample2State extends State<MyTabBarExample2> with SingleTickerProviderStateMixin{
-  
+class _MyTabBarExample2State extends State<MyTabBarExample2>
+    with SingleTickerProviderStateMixin {
+
   late TabController _tabController;
+
   void initState() {
     super.initState();
     _tabController = TabController(length: 4, vsync: this);
@@ -1702,6 +1720,7 @@ class _MyTabBarExample2State extends State<MyTabBarExample2> with SingleTickerPr
     _tabController.dispose();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -1711,13 +1730,13 @@ class _MyTabBarExample2State extends State<MyTabBarExample2> with SingleTickerPr
           title: Text('TabBar在底部'),
         ),
         body: TabBarView(
-          controller: _tabController,
+            controller: _tabController,
             children: [
-          Center(child: Text('Tab1 Content')),
-          Center(child: Text('Tab2 Content')),
-          Center(child: Text('Tab3 Content')),
-          Center(child: Text('Tab4 Content')),
-        ]),
+              Center(child: Text('Tab1 Content')),
+              Center(child: Text('Tab2 Content')),
+              Center(child: Text('Tab3 Content')),
+              Center(child: Text('Tab4 Content')),
+            ]),
         bottomNavigationBar: Material(
           color: Colors.blue,
           child: TabBar(
@@ -1735,3 +1754,56 @@ class _MyTabBarExample2State extends State<MyTabBarExample2> with SingleTickerPr
   }
 }
 
+List<Widget> DrawerExample() {
+  Widget text1 = Text('''
+  Drawer 是 Flutter 中的一种常见的侧边栏组件，通常用于显示应用程序的导航选项或菜单。
+  它通常会从屏幕的一侧滑出，并可以容纳多个 ListTile、IconButton 或其他小部件，
+  用来引导用户进行应用内的不同操作。
+  Drawer 组件通常是通过 Scaffold 的 drawer 属性来使用的，Scaffold 是 Flutter 布局的基本结构之一
+  Drawer 会自动包含一个滑动手势支持，使得用户可以通过从屏幕边缘滑动来打开侧边栏。
+  ''');
+
+  Widget exp1 = Container(
+    height: 400,
+    child: Scaffold(
+      appBar: AppBar(
+        title: Text('Drawer Demo'),
+      ),
+      drawer: Drawer(
+        child: ListView(
+          padding: EdgeInsets.zero,
+          children: [
+            UserAccountsDrawerHeader(accountName: Text('张三'),
+              accountEmail: Text('张三.email'),
+              currentAccountPicture: CircleAvatar(
+                backgroundColor: Colors.orange,
+                child: Text('张', style: TextStyle(fontSize: 40)),
+              )),
+            ListTile(
+              leading: Icon(Icons.home),
+              title: Text('首页'),
+              onTap: () {
+                Navigator.pop(Get.context!); //关闭Drawer
+              }
+            ),
+            ListTile(
+              leading: Icon(Icons.account_circle),
+              title: Text('头像'),
+                onTap: () {
+                  Navigator.pop(Get.context!); //关闭Drawer
+                }
+            ),
+            ListTile(
+                leading: Icon(Icons.settings),
+                title: Text('设置'),
+                onTap: () {
+                  Navigator.pop(Get.context!); //关闭Drawer
+                }
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+  return [text1, exp1];
+}
