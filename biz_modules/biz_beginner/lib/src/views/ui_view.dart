@@ -24,8 +24,7 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '图片和文本'),
         ...List.generate(
             controller.commonWidgets.length,
-                (index) =>
-                FSListItem(
+            (index) => FSListItem(
                   title: controller.commonWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -34,8 +33,7 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '布局组件'),
         ...List.generate(
             controller.layoutWidgets.length,
-                (index) =>
-                FSListItem(
+            (index) => FSListItem(
                   title: controller.layoutWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -44,8 +42,7 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '输入组件'),
         ...List.generate(
             controller.inputWidgets.length,
-                (index) =>
-                FSListItem(
+            (index) => FSListItem(
                   title: controller.inputWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -54,8 +51,7 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '按钮和交互组件'),
         ...List.generate(
             controller.interactWidgets.length,
-                (index) =>
-                FSListItem(
+            (index) => FSListItem(
                   title: controller.interactWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -64,8 +60,7 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '导航组件'),
         ...List.generate(
             controller.navWidgets.length,
-                (index) =>
-                FSListItem(
+            (index) => FSListItem(
                   title: controller.navWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -74,8 +69,7 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '动画组件'),
         ...List.generate(
             controller.aniWidgets.length,
-                (index) =>
-                FSListItem(
+            (index) => FSListItem(
                   title: controller.aniWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -84,8 +78,7 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '其它组件'),
         ...List.generate(
             controller.othersWidgets.length,
-                (index) =>
-                FSListItem(
+            (index) => FSListItem(
                   title: controller.othersWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -153,7 +146,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'Drawer') {
       BottomSheetUtil.showBottomSheet(DrawerExample());
     } else if (title == 'AnimatedContainer') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(AnimatedContainerExample());
     } else if (title == 'FadeTransition') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'Hero') {
@@ -212,9 +205,9 @@ class UIView extends GetView<UIController> {
       color: Colors.red,
       child: Text(
         '每个字之间有间距，行与行之间有间距'
-            '每个字之间有间距，行与行之间有间距'
-            '每个字之间有间距，行与行之间有间距'
-            '每个字之间有间距，行与行之间有间距',
+        '每个字之间有间距，行与行之间有间距'
+        '每个字之间有间距，行与行之间有间距'
+        '每个字之间有间距，行与行之间有间距',
         style: TextStyle(
           fontSize: 18,
           letterSpacing: 3.0, // 设置字母间距
@@ -225,19 +218,17 @@ class UIView extends GetView<UIController> {
 
     Widget text7 = RichText(
         text: TextSpan(children: <TextSpan>[
-          TextSpan(
-              text: 'Flutter是一个',
-              style: TextStyle(color: Colors.black, fontSize: 20)),
-          TextSpan(
-              text: '很强大的框架',
-              style: TextStyle(
-                  color: Colors.blue,
-                  fontSize: 20,
-                  fontWeight: FontWeight.bold)),
-          TextSpan(
-              text: ', 适用于多平台开发',
-              style: TextStyle(color: Colors.red, fontSize: 20)),
-        ]));
+      TextSpan(
+          text: 'Flutter是一个',
+          style: TextStyle(color: Colors.black, fontSize: 20)),
+      TextSpan(
+          text: '很强大的框架',
+          style: TextStyle(
+              color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)),
+      TextSpan(
+          text: ', 适用于多平台开发',
+          style: TextStyle(color: Colors.red, fontSize: 20)),
+    ]));
 
     Widget text8 = Text(
       '这是一个很长的文本案例，超过一定行数后会被截断这是一个很长的文本案例，超过一定行数后会被截断这是一个很长的文本案例，超过一定行数后会被截断',
@@ -489,9 +480,7 @@ class UIView extends GetView<UIController> {
       Container(color: Colors.red, width: 50, height: 50),
       Expanded(
           child: Container(
-              color: Colors.blue,
-              height: 50,
-              child: Text('Expanded填充剩余空间'))),
+              color: Colors.blue, height: 50, child: Text('Expanded填充剩余空间'))),
       Container(color: Colors.green, width: 50, height: 50)
     ]);
 
@@ -885,17 +874,17 @@ class UIView extends GetView<UIController> {
     Widget exp4 = Container(
       child: Material(
           child: InkWell(
-            child: Container(
-              width: 80,
-              height: 80,
-              child: Text('InkWell'),
-            ),
-            splashColor: Colors.red, // 设置水波纹颜色
-            // highlightColor: Colors.green,  // 设置高亮颜色
-            onTap: () {
-              Get.snackbar('InkWell', 'InkWell被点击了');
-            },
-          )),
+        child: Container(
+          width: 80,
+          height: 80,
+          child: Text('InkWell'),
+        ),
+        splashColor: Colors.red, // 设置水波纹颜色
+        // highlightColor: Colors.green,  // 设置高亮颜色
+        onTap: () {
+          Get.snackbar('InkWell', 'InkWell被点击了');
+        },
+      )),
     );
 
     return [text1, exp1, text2, exp2, text3, exp3, text4, exp4];
@@ -980,7 +969,6 @@ class UIView extends GetView<UIController> {
       exp2,
       SizedBox(height: 30),
       exp3,
-
     ];
   }
 }
@@ -1059,16 +1047,14 @@ class _MyFormState extends State<MyForm> {
         children: <Widget>[
           TextFormField(
             controller: _emailController,
-            decoration: InputDecoration(
-                labelText: '邮箱', hintText: '请输入邮箱地址'),
+            decoration: InputDecoration(labelText: '邮箱', hintText: '请输入邮箱地址'),
             keyboardType: TextInputType.emailAddress,
             validator: _validateEmail,
           ),
           SizedBox(height: 17),
           TextFormField(
             controller: _pwdController,
-            decoration: InputDecoration(
-                labelText: '密码', hintText: '请输入密码'),
+            decoration: InputDecoration(labelText: '密码', hintText: '请输入密码'),
             obscureText: true,
             validator: _validatePwd,
           ),
@@ -1306,8 +1292,7 @@ class FirstPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) =>
-                          SecondPage(
+                      builder: (context) => SecondPage(
                             message: 'FirstPage Data',
                           )),
                 ).then((data) {
@@ -1618,14 +1603,11 @@ class _BottomNavExample3State extends State<BottomNavExample3> {
   }
 }
 
-
 List<Widget> TabBarExample() {
-  Widget text1 = Text(
-      '''
+  Widget text1 = Text('''
     TabBar用于创建可切换的选项卡界面，通常与 TabController 和 TabBarView 配合使用。
     TabBar 允许用户在不同的内容区域之间进行切换，常见于应用的顶部导航或底部导航栏。
-    '''
-  );
+    ''');
 
   Widget exp1 = MyTabBarExample1();
   Widget exp2 = MyTabBarExample2();
@@ -1641,7 +1623,6 @@ class MyTabBarExample1 extends StatefulWidget {
 
 class _MyTabBarExample1State extends State<MyTabBarExample1>
     with SingleTickerProviderStateMixin {
-
   late TabController _tabController;
 
   void initState() {
@@ -1698,7 +1679,6 @@ class _MyTabBarExample1State extends State<MyTabBarExample1>
   }
 }
 
-
 class MyTabBarExample2 extends StatefulWidget {
   const MyTabBarExample2({super.key});
 
@@ -1708,7 +1688,6 @@ class MyTabBarExample2 extends StatefulWidget {
 
 class _MyTabBarExample2State extends State<MyTabBarExample2>
     with SingleTickerProviderStateMixin {
-
   late TabController _tabController;
 
   void initState() {
@@ -1729,14 +1708,12 @@ class _MyTabBarExample2State extends State<MyTabBarExample2>
         appBar: AppBar(
           title: Text('TabBar在底部'),
         ),
-        body: TabBarView(
-            controller: _tabController,
-            children: [
-              Center(child: Text('Tab1 Content')),
-              Center(child: Text('Tab2 Content')),
-              Center(child: Text('Tab3 Content')),
-              Center(child: Text('Tab4 Content')),
-            ]),
+        body: TabBarView(controller: _tabController, children: [
+          Center(child: Text('Tab1 Content')),
+          Center(child: Text('Tab2 Content')),
+          Center(child: Text('Tab3 Content')),
+          Center(child: Text('Tab4 Content')),
+        ]),
         bottomNavigationBar: Material(
           color: Colors.blue,
           child: TabBar(
@@ -1773,37 +1750,87 @@ List<Widget> DrawerExample() {
         child: ListView(
           padding: EdgeInsets.zero,
           children: [
-            UserAccountsDrawerHeader(accountName: Text('张三'),
-              accountEmail: Text('张三.email'),
-              currentAccountPicture: CircleAvatar(
-                backgroundColor: Colors.orange,
-                child: Text('张', style: TextStyle(fontSize: 40)),
-              )),
+            UserAccountsDrawerHeader(
+                accountName: Text('张三'),
+                accountEmail: Text('张三.email'),
+                currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.orange,
+                  child: Text('张', style: TextStyle(fontSize: 40)),
+                )),
             ListTile(
-              leading: Icon(Icons.home),
-              title: Text('首页'),
-              onTap: () {
-                Navigator.pop(Get.context!); //关闭Drawer
-              }
-            ),
-            ListTile(
-              leading: Icon(Icons.account_circle),
-              title: Text('头像'),
+                leading: Icon(Icons.home),
+                title: Text('首页'),
                 onTap: () {
                   Navigator.pop(Get.context!); //关闭Drawer
-                }
-            ),
+                }),
+            ListTile(
+                leading: Icon(Icons.account_circle),
+                title: Text('头像'),
+                onTap: () {
+                  Navigator.pop(Get.context!); //关闭Drawer
+                }),
             ListTile(
                 leading: Icon(Icons.settings),
                 title: Text('设置'),
                 onTap: () {
                   Navigator.pop(Get.context!); //关闭Drawer
-                }
-            ),
+                }),
           ],
         ),
       ),
     ),
   );
   return [text1, exp1];
+}
+
+List<Widget> AnimatedContainerExample() {
+  Widget text1 = Text('''
+    AnimatedContainer 是 Flutter 中用于实现动画效果的容器组件，
+    它允许你在特定属性（如大小、颜色、边框半径等）变化时自动平滑地过渡。
+    你可以通过修改 AnimatedContainer 的属性，
+    并设置 duration（动画时长）和 curve（动画曲线）来让属性的变化具有动画效果。
+    ''');
+
+  Widget exp1 = AnimatedContainerExp1();
+  return [text1, exp1];
+}
+
+class AnimatedContainerExp1 extends StatefulWidget {
+  const AnimatedContainerExp1({super.key});
+
+  @override
+  State<AnimatedContainerExp1> createState() => _AnimatedContainerExp1State();
+}
+
+class _AnimatedContainerExp1State extends State<AnimatedContainerExp1> {
+  double _height = 200.0;
+  Color _color = Colors.blue;
+  double _angle = 10.0;
+
+  void _changeProperties() {
+    setState(() {
+      _height = _height < 50 ? 150.0 : (_height - 30);
+      _color = _color == Colors.blue ? Colors.red : Colors.blue;
+      _angle = _angle + 45;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: _height,
+      child: GestureDetector(
+        onTap: _changeProperties,
+        child: Transform.rotate(
+          angle: _angle,
+          child: AnimatedContainer(
+              duration: Duration(seconds: 3),
+              curve: Curves.easeInOut,
+              height: _height,
+              color: _color,
+              child: Center(child: Text('点击'))),
+        ),
+      ),
+    );
+  }
 }
