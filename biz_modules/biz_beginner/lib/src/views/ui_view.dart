@@ -24,7 +24,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '图片和文本'),
         ...List.generate(
             controller.commonWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.commonWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -33,7 +34,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '布局组件'),
         ...List.generate(
             controller.layoutWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.layoutWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -42,7 +44,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '输入组件'),
         ...List.generate(
             controller.inputWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.inputWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -51,7 +54,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '按钮和交互组件'),
         ...List.generate(
             controller.interactWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.interactWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -60,7 +64,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '导航组件'),
         ...List.generate(
             controller.navWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.navWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -69,7 +74,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '动画组件'),
         ...List.generate(
             controller.aniWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.aniWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -78,7 +84,8 @@ class UIView extends GetView<UIController> {
         TitleWidget(title: '其它组件'),
         ...List.generate(
             controller.othersWidgets.length,
-            (index) => FSListItem(
+                (index) =>
+                FSListItem(
                   title: controller.othersWidgets[index],
                   onTap: (String? title) {
                     showByTitle(title ?? '');
@@ -150,7 +157,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'FadeTransition') {
       BottomSheetUtil.showBottomSheet(FadeTransitionExample());
     } else if (title == 'Hero') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(HeroExample());
     } else if (title == 'AlertDialog') {
       BottomSheetUtil.showBottomSheet([]);
     }
@@ -205,9 +212,9 @@ class UIView extends GetView<UIController> {
       color: Colors.red,
       child: Text(
         '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距'
-        '每个字之间有间距，行与行之间有间距',
+            '每个字之间有间距，行与行之间有间距'
+            '每个字之间有间距，行与行之间有间距'
+            '每个字之间有间距，行与行之间有间距',
         style: TextStyle(
           fontSize: 18,
           letterSpacing: 3.0, // 设置字母间距
@@ -218,17 +225,19 @@ class UIView extends GetView<UIController> {
 
     Widget text7 = RichText(
         text: TextSpan(children: <TextSpan>[
-      TextSpan(
-          text: 'Flutter是一个',
-          style: TextStyle(color: Colors.black, fontSize: 20)),
-      TextSpan(
-          text: '很强大的框架',
-          style: TextStyle(
-              color: Colors.blue, fontSize: 20, fontWeight: FontWeight.bold)),
-      TextSpan(
-          text: ', 适用于多平台开发',
-          style: TextStyle(color: Colors.red, fontSize: 20)),
-    ]));
+          TextSpan(
+              text: 'Flutter是一个',
+              style: TextStyle(color: Colors.black, fontSize: 20)),
+          TextSpan(
+              text: '很强大的框架',
+              style: TextStyle(
+                  color: Colors.blue,
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold)),
+          TextSpan(
+              text: ', 适用于多平台开发',
+              style: TextStyle(color: Colors.red, fontSize: 20)),
+        ]));
 
     Widget text8 = Text(
       '这是一个很长的文本案例，超过一定行数后会被截断这是一个很长的文本案例，超过一定行数后会被截断这是一个很长的文本案例，超过一定行数后会被截断',
@@ -480,7 +489,9 @@ class UIView extends GetView<UIController> {
       Container(color: Colors.red, width: 50, height: 50),
       Expanded(
           child: Container(
-              color: Colors.blue, height: 50, child: Text('Expanded填充剩余空间'))),
+              color: Colors.blue,
+              height: 50,
+              child: Text('Expanded填充剩余空间'))),
       Container(color: Colors.green, width: 50, height: 50)
     ]);
 
@@ -874,17 +885,17 @@ class UIView extends GetView<UIController> {
     Widget exp4 = Container(
       child: Material(
           child: InkWell(
-        child: Container(
-          width: 80,
-          height: 80,
-          child: Text('InkWell'),
-        ),
-        splashColor: Colors.red, // 设置水波纹颜色
-        // highlightColor: Colors.green,  // 设置高亮颜色
-        onTap: () {
-          Get.snackbar('InkWell', 'InkWell被点击了');
-        },
-      )),
+            child: Container(
+              width: 80,
+              height: 80,
+              child: Text('InkWell'),
+            ),
+            splashColor: Colors.red, // 设置水波纹颜色
+            // highlightColor: Colors.green,  // 设置高亮颜色
+            onTap: () {
+              Get.snackbar('InkWell', 'InkWell被点击了');
+            },
+          )),
     );
 
     return [text1, exp1, text2, exp2, text3, exp3, text4, exp4];
@@ -1047,14 +1058,16 @@ class _MyFormState extends State<MyForm> {
         children: <Widget>[
           TextFormField(
             controller: _emailController,
-            decoration: InputDecoration(labelText: '邮箱', hintText: '请输入邮箱地址'),
+            decoration: InputDecoration(
+                labelText: '邮箱', hintText: '请输入邮箱地址'),
             keyboardType: TextInputType.emailAddress,
             validator: _validateEmail,
           ),
           SizedBox(height: 17),
           TextFormField(
             controller: _pwdController,
-            decoration: InputDecoration(labelText: '密码', hintText: '请输入密码'),
+            decoration: InputDecoration(
+                labelText: '密码', hintText: '请输入密码'),
             obscureText: true,
             validator: _validatePwd,
           ),
@@ -1292,7 +1305,8 @@ class FirstPage extends StatelessWidget {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => SecondPage(
+                      builder: (context) =>
+                          SecondPage(
                             message: 'FirstPage Data',
                           )),
                 ).then((data) {
@@ -1846,6 +1860,21 @@ List<Widget> FadeTransitionExample() {
   return [text1, exp1];
 }
 
+List<Widget> HeroExample() {
+  Widget text1 = Text('''
+  Hero 组件通过为两个页面上的相同的 widget（通常是相同的 Tag）创建动画链接，实现跨页面的动画效果。
+  它通过将 tag（标识符）相同的 Hero 组件关联起来，在页面切换时自动生成动画。
+  Flutter 会根据这个 tag 标识符在两个页面之间平滑地过渡对应的 widget。
+  ''');
+
+  Widget exp1 = TextButton(onPressed: () {
+    Navigator.push(Get.context!, MaterialPageRoute(builder: (context) {
+      return HeroExp1();
+    }));
+  }, child: Text('点击', style: TextStyle(color: Colors.white),));
+  return [text1, exp1];
+}
+
 class FadeTransExp1 extends StatefulWidget {
   const FadeTransExp1({super.key});
 
@@ -1865,7 +1894,7 @@ class _FadeTransExp1State extends State<FadeTransExp1>
         AnimationController(vsync: this, duration: Duration(seconds: 2));
     //创建一个动画
     _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(
-      CurvedAnimation(parent: _controller, curve: Curves.easeInOut)
+        CurvedAnimation(parent: _controller, curve: Curves.easeInOut)
     );
   }
 
@@ -1897,6 +1926,53 @@ class _FadeTransExp1State extends State<FadeTransExp1>
           child: Text('点击Fade动画'),
         ),),
       ),
+    );
+  }
+}
+
+
+class HeroExp1 extends StatelessWidget {
+  const HeroExp1({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+        appBar: AppBar(title: Text('页面一')),
+        body: GestureDetector(
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return HeroExp2();
+            }));
+          },
+          child: Center(
+            child: Hero(
+              tag: 'hero-tag1',
+              child: Icon(Icons.ac_unit, size: 30),
+            ),
+          ),
+        ),
+    );
+  }
+}
+
+class HeroExp2 extends StatelessWidget {
+  const HeroExp2({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return  Scaffold(
+        appBar: AppBar(title: Text('页面二')),
+        body: GestureDetector(
+          onTap: () {
+            Navigator.pop(context);
+          },
+          child: Center(
+            child: Hero(
+              tag: 'hero-tag1',
+              child: Icon(Icons.ac_unit, size: 300),
+            ),
+          ),
+        ),
     );
   }
 }
