@@ -148,7 +148,7 @@ class UIView extends GetView<UIController> {
     } else if (title == 'AnimatedContainer') {
       BottomSheetUtil.showBottomSheet(AnimatedContainerExample());
     } else if (title == 'FadeTransition') {
-      BottomSheetUtil.showBottomSheet([]);
+      BottomSheetUtil.showBottomSheet(FadeTransitionExample());
     } else if (title == 'Hero') {
       BottomSheetUtil.showBottomSheet([]);
     } else if (title == 'AlertDialog') {
@@ -1830,6 +1830,72 @@ class _AnimatedContainerExp1State extends State<AnimatedContainerExp1> {
               color: _color,
               child: Center(child: Text('点击'))),
         ),
+      ),
+    );
+  }
+}
+
+List<Widget> FadeTransitionExample() {
+  Widget text1 = Text('''
+  FadeTransition
+  能够实现某个组件的透明度（opacity）变化动画。
+  该组件通常与 AnimationController 和 Tween 一起使用，
+  通过指定一个 Animation<double> 来控制透明度的渐变效果。
+  ''');
+  Widget exp1 = FadeTransExp1();
+  return [text1, exp1];
+}
+
+class FadeTransExp1 extends StatefulWidget {
+  const FadeTransExp1({super.key});
+
+  @override
+  State<FadeTransExp1> createState() => _FadeTransExp1State();
+}
+
+class _FadeTransExp1State extends State<FadeTransExp1>
+    with TickerProviderStateMixin {
+  late AnimationController _controller;
+  late Animation<double> _opacityAnimation;
+
+  void initState() {
+    super.initState();
+    //创建一个动画控制器
+    _controller =
+        AnimationController(vsync: this, duration: Duration(seconds: 2));
+    //创建一个动画
+    _opacityAnimation = Tween<double>(begin: 0, end: 1).animate(
+      CurvedAnimation(parent: _controller, curve: Curves.easeInOut)
+    );
+  }
+
+  void dispose() {
+    _controller.dispose(); // 释放控制器
+    super.dispose();
+  }
+
+  void _toggleOpacity() {
+    // 开始或停止动画
+    if (_controller.status == AnimationStatus.completed) {
+      _controller.reverse();
+    } else {
+      _controller.forward();
+    }
+  }
+
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      color: Colors.blue,
+      child: GestureDetector(
+        onTap: _toggleOpacity,
+        child: FadeTransition(opacity: _opacityAnimation, child: Container(
+          height: 30,
+          color: Colors.red,
+          child: Text('点击Fade动画'),
+        ),),
       ),
     );
   }
