@@ -176,6 +176,8 @@ class TabPage extends StatelessWidget {
                 Get.toNamed(BizBeginnerRouter.langBase);
               } else if(title == 'UI组件') {
                 Get.toNamed(BizBeginnerRouter.uiView);
+              } else if(title == '事件交互') {
+                Get.toNamed(BizBeginnerRouter.event);
               }
         },),));
   }
