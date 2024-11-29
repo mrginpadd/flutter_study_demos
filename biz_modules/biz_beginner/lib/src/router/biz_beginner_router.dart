@@ -1,4 +1,5 @@
 import 'package:biz_beginner/src/views/event_view.dart';
+import 'package:biz_beginner/src/views/route_view.dart';
 import 'package:biz_beginner/src/views/ui_view.dart';
 import 'package:biz_common/biz_common.dart';
 
@@ -7,9 +8,11 @@ class BizBeginnerRouter {
   static const String langBase = '/beginner/langBase';
   static const String uiView = '/beginner/uiView';
   static const String event = '/beginner/event';
+  static const String route = '/beginner/route';
   static final List<GetPage> routes = [
     GetPage(name: langBase, page: () => LangBaseView()),
     GetPage(name: uiView, page: () => UIView()),
-    GetPage(name: event, page: () => EventView())
+    GetPage(name: event, page: () => EventView()),
+    GetPage(name: route, page: () => RouteView())
   ];
 }
