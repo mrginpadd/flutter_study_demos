@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fs_utils/src/network_util.dart';
 import 'package:get/get.dart';
 
 class BottomSheetUtil {
